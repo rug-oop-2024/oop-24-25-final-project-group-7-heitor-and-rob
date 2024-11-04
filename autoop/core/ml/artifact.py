@@ -5,6 +5,7 @@ import base64
 
 
 class Artifact(BaseModel, ABC):
+    name: str = Field()
     _asset_path: str = PrivateAttr()
     _version: str = PrivateAttr()
     _data: bytes = PrivateAttr()
@@ -13,8 +14,7 @@ class Artifact(BaseModel, ABC):
     tags: List[str] = Field(default_factory=list)
 
     def __init__(self, name: str, asset_path: str, version: str, data: bytes, metadata: Dict[str, Any], type: str, tags: Optional[List[str]] = None):
-        super().__init__()
-        self._name = name
+        super().__init__(name=name, tags=tags or [])
         self._asset_path = asset_path
         self._version = version
         self._data = data
