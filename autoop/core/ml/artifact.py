@@ -43,7 +43,9 @@ class Artifact(BaseModel, ABC):
 
     @abstractmethod
     def read(self) -> Any:
-        pass
+        if self._data is None:
+            raise ValueError("No data found in the artifact.")
+        return self._data
 
     @abstractmethod
     def save(self, data: Any):
