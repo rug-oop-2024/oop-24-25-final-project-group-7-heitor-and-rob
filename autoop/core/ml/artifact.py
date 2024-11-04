@@ -12,8 +12,9 @@ class Artifact(BaseModel, ABC):
     _type: str = PrivateAttr()
     tags: List[str] = Field(default_factory=list)
 
-    def __init__(self, asset_path: str, version: str, data: bytes, metadata: Dict[str, Any], type: str, tags: Optional[List[str]] = None):
+    def __init__(self, name: str, asset_path: str, version: str, data: bytes, metadata: Dict[str, Any], type: str, tags: Optional[List[str]] = None):
         super().__init__()
+        self._name = name
         self._asset_path = asset_path
         self._version = version
         self._data = data
