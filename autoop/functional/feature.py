@@ -28,7 +28,7 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
 
         # here we're checking if the values in the column are numeric and if the range of the values in that column is wider than 1 (indication of continuous data)
         if pd.api.types.is_numeric_dtype(col_data) and (col_data.max() - col_data.min() > 1):
-            feature_type = "numeric"
+            feature_type = "numerical"
         else:
             feature_type = "categorical"
 

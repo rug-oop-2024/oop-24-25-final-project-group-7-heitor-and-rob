@@ -5,7 +5,7 @@ import numpy as np
 
 from autoop.core.ml.dataset import Dataset
 
-class Feature(BaseModel):
+class Feature():
     def __init__(self, name: str, type: str) -> None:
         self.name = name
         self.type = type
