@@ -12,10 +12,15 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
     Returns:
         List[Feature]: List of features with their types.
     """
-    if isinstance(dataset, Dataset):
+    if not isinstance(dataset, Dataset):
         raise ValueError("dataset must be an instance of Dataset")
 
     df = dataset.read()
+
+    if df is None:
+        raise ValueError(
+            "Dataset has no data to read. Ensure data is initialized.")
+
     features = []
 
     for column in df.columns:

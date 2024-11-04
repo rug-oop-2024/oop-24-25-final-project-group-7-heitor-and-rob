@@ -9,7 +9,6 @@ class Artifact(BaseModel, ABC):
     _asset_path: str = PrivateAttr()
     _version: str = PrivateAttr()
     _data: bytes = PrivateAttr()
-    _metadata: Dict[str, Any] = PrivateAttr()
     _type: str = PrivateAttr()
     tags: List[str] = Field(default_factory=list)
 
@@ -36,6 +35,10 @@ class Artifact(BaseModel, ABC):
             "version": self._version,
             "type": self._type,
             "tags": self.tags,
+            "metadata": {
+                "experiment_id": None,
+                "run_id": None,
+            }
         }
 
     @abstractmethod
