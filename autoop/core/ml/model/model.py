@@ -1,6 +1,5 @@
 
 from abc import abstractmethod, ABC
-from autoop.core.ml.artifact import Artifact
 import numpy as np
 from copy import deepcopy
 from typing import Literal, Any
@@ -8,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 
 
-class Model(Artifact, ABC):
+class Model(ABC):
     def __init__(self, model: Any, type: Literal["classification", "regression"], **hyperparameters):
         super().__init__(type="model")
         self._model = model
