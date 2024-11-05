@@ -13,39 +13,36 @@ def get_metric(name: str):
     if len(name) == 0:
         raise ValueError("Name of metric must be a non empty string")
     if name.lower() == 'accuracy':
-        return Accuracy
+        return Accuracy()
     if name.lower() == "meansquarederror":
-        return MeanSquaredError
+        return MeanSquaredError()
 
 class Metric(ABC):
     """Base class for all metrics.
     """
     # your code here
     # remember: metrics take ground truth and prediction as input and return a real number
-    def __init__(self, ground_truth: float, prediction: float) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self._ground_truth = ground_truth
-        self._prediction = prediction
+        self._ground_truth = None
+        self._prediction = None
 
     @abstractmethod
-    def calculate(self) -> int:
+    def evaluate(self, prediction: float, ground_truth: float) -> int:
         pass
 
-    def __call__(self) -> int:
-        return self.calculate()
 
 # add here concrete implementations of the Metric class
 class Accuracy(Metric):
-    def __init__(self, ground_truth, prediction):
-        super().__init__(ground_truth, prediction)
+    def __init__(self):
+        super().__init__()
 
-    def calculate(self):
-        return np.mean(self._ground_truth == self._prediction)
+    def evaluate(self, prediction: float, ground_truth: float) -> int:
+        return np.mean(ground_truth == prediction)
     
 class MeanSquaredError(Metric):
-    def __init__(self, ground_truth, prediction):
-        super().__init__(ground_truth, prediction)
+    def __init__(self):
+        super().__init__()
 
-    def calculate(self):
-        return np.mean((self._prediction - self._ground_truth) ** 2)
-    
+    def evaluate(self, prediction: float, ground_truth: float) -> int:
+        return np.mean((prediction - ground_truth) ** 2)

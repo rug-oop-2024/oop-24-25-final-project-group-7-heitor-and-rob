@@ -1,5 +1,5 @@
 from sklearn.svm import SVC
-from ml.model import Model
+from .. import Model
 
 
 class SVMClassifier(Model):
