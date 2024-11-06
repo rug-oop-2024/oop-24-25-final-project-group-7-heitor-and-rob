@@ -4,9 +4,15 @@ import numpy as np
 
 
 class MultipleLinearRegression(Model):
+    def __init__(self, **hyperparameters):
+        super().__init__(**hyperparameters)
+        self.type = "regression"
+        self.parameters = {}
+        self.initialize_model()
+
     def initialize_model(self):
         """Initialize a Scikit-learn LinearRegression model for multiple linear regression."""
-        return LinearRegression(**self.hyperparameters)
+        return LinearRegression(**self._hyperparameters)
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
         """
@@ -28,13 +34,13 @@ class MultipleLinearRegression(Model):
         w_wave = np.linalg.pinv(x_wave_transpose.dot(x_wave))
         w_wave_star = w_wave.dot(x_wave_transpose).dot(ground_truth)
 
-        self._parameters['weights'] = w_wave_star[:-1]
-        self._parameters['biases'] = w_wave_star[-1]
+        self.parameters['weights'] = w_wave_star[:-1]
+        self.parameters['biases'] = w_wave_star[-1]
 
     def predict(self, observation: np.ndarray) -> np.ndarray:
         """Make predictions for new input data."""
-        if 'weights' not in self._parameters or \
-                'biases' not in self._parameters:
+        if 'weights' not in self.parameters or \
+                'biases' not in self.parameters:
             raise ValueError("Model has not been fitted yet.")
-        y_hat = observation.dot(self._parameters['weights'])
-        return y_hat + self._parameters['biases']
+        y_hat = observation.dot(self.parameters['weights'])
+        return y_hat + self.parameters['biases']
