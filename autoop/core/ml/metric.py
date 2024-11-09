@@ -36,7 +36,17 @@ class MeanSquaredError(Metric):
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         return np.mean((prediction - ground_truth) ** 2)
     
+class RootMeanSquaredError(MeanSquaredError):
+    def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
+        return  np.sqrt(super().evaluate(prediction, ground_truth))
+    
+class Rsquared(Metric):
+    def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray):
+        y_minus = np.mean(ground_truth)
+        return 1 - ((sum(ground_truth-prediction)**2)/sum(ground_truth-y_minus)**2)
+    
 class Precision(Metric):
+    #classification
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         classes = np.unique(ground_truth)
         precisions = []
@@ -50,6 +60,7 @@ class Precision(Metric):
         return precisions/len(classes)
     
 class Recall(Metric):
+    #classification
     def evaluate(self, prediction, ground_truth):
         classes = np.unique(ground_truth)
         recall_list = []
