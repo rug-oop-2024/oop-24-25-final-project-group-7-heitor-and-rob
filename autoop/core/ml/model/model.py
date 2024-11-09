@@ -8,10 +8,9 @@ from sklearn.linear_model import LogisticRegression
 
 
 class Model(ABC):
-    def __init__(self, model: Any, type: Literal["classification", "regression"], **hyperparameters):
-        super().__init__(type="model")
-        self._model = model
-        self._type = type
+    def __init__(self, **hyperparameters):
+        self._model = None
+        self.type = None
         self._hyperparameters = deepcopy(hyperparameters)
         self.parameters = None
 

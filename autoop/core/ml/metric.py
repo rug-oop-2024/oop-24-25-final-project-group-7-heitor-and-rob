@@ -36,34 +36,20 @@ class MeanSquaredError(Metric):
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         return np.mean((prediction - ground_truth) ** 2)
     
-class Macro_Recall(Metric):
+class Precision(Metric):
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
-        num_classes = len(np.unique(ground_truth))
-        recall = 0
-        for class_ in list(ground_truth.unique()):
-            # all classes except current are considered negative
-            temp_true = [1 if p == class_ else 0 for p in ground_truth]
-            temp_pred = [1 if p == class_ else 0 for p in y_pred]
-        
-        
-        # compute true positive for current class
-            tp = true_positive(temp_true, temp_pred)
+        classes = np.unique(ground_truth)
+        precisions = []
+        for category in classes:
+            true_positives = np.sum((prediction == category) & (ground_truth == category))
+            predicted_positives = np.sum(prediction == category)
+            if predicted_positives == 0:
+                precisions.append(0)
+            else:
+                precisions.append(true_positives / predicted_positives)
+        return precisions/len(classes)
+            
+    
 
-
-
-                    # compute false negative for current class
-            fn = false_negative(temp_true, temp_pred)
-            
-            
-            # compute recall for current class
-            temp_recall = tp / (tp + fn + 1e-6)
-            
-            # keep adding recall for all classes
-            recall += temp_recall
-            
-        # calculate and return average recall over all classes
-        recall /= num_classes
-        
-        return recall
 
 
