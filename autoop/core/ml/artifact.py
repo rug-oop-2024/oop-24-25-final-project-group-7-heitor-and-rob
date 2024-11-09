@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field, PrivateAttr
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 import base64
+import pickle
 
 
 class Artifact(BaseModel, ABC):
@@ -49,4 +50,5 @@ class Artifact(BaseModel, ABC):
 
     @abstractmethod
     def save(self, data: Any):
-        pass
+        with open(self._asset_path, 'wb') as f:
+            pickle.dump(self, f)

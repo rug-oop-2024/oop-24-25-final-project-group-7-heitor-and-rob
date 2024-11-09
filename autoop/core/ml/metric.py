@@ -5,6 +5,10 @@ import numpy as np
 METRICS = [
     "mean_squared_error",
     "accuracy",
+    "root_mean_squared_error",
+    "r_squared",
+    "precision",
+    "recall",
 ] # add the names (in strings) of the metrics you implement
 
 def get_metric(name: str):
@@ -16,6 +20,14 @@ def get_metric(name: str):
         return Accuracy()
     if name.lower() == "meansquarederror":
         return MeanSquaredError()
+    if name.lower() == "root_mean_squared_error":
+        return RootMeanSquaredError()
+    if name.lower() == "r_squared":
+        return Rsquared()
+    if name.lower() == "precision":
+        return Precision()
+    if name.lower() == "recall":
+        return Recall()
 
 class Metric(ABC):
     """Base class for all metrics.
@@ -41,9 +53,11 @@ class RootMeanSquaredError(MeanSquaredError):
         return  np.sqrt(super().evaluate(prediction, ground_truth))
     
 class Rsquared(Metric):
-    def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray):
-        y_minus = np.mean(ground_truth)
-        return 1 - ((sum(ground_truth-prediction)**2)/sum(ground_truth-y_minus)**2)
+    def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
+        y_mean = np.mean(ground_truth)
+        total = np.sum((ground_truth - y_mean) ** 2)
+        residual = np.sum((ground_truth - prediction) ** 2)
+        return 1 - (residual / total)
     
 class Precision(Metric):
     #classification
@@ -72,8 +86,8 @@ class Recall(Metric):
             else:
                 recall_list.append(true_positives/(true_positives+false_negatives))
         return recall_list/len(classes)
-            
-    
+
+
 
 
 
