@@ -48,6 +48,19 @@ class Precision(Metric):
             else:
                 precisions.append(true_positives / predicted_positives)
         return precisions/len(classes)
+    
+class Recall(Metric):
+    def evaluate(self, prediction, ground_truth):
+        classes = np.unique(ground_truth)
+        recall_list = []
+        for category in classes:
+            true_positives = np.sum((prediction == category) & (ground_truth == category))
+            false_negatives = np.sum((ground_truth == category) & (prediction != category))
+            if true_positives + false_negatives == 0:
+                recall_list.append(0)
+            else:
+                recall_list.append(true_positives/(true_positives+false_negatives))
+        return recall_list/len(classes)
             
     
 
