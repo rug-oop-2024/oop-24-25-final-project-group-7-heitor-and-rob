@@ -2,10 +2,17 @@ from sklearn.linear_model import LinearRegression
 from autoop.core.ml.model.model import Model
 import numpy as np
 
-
 class MultipleLinearRegression(Model):
+    """
+    Implements a Multiple Linear Regression model,
+    using the closed-form solution.
+
+    This class allows for fitting a linear model,
+    to a set of observations and making predictions.
+    """
+    
+
     def initialize_model(self):
-        """Initialize a Scikit-learn LinearRegression model for multiple linear regression."""
         return LinearRegression(**self.hyperparameters)
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
