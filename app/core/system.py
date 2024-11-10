@@ -38,7 +38,7 @@ class ArtifactRegistry:
             "type": artifact.type,
         }
         self._database.set("artifacts", artifact.id, entry)
-    
+
     def list(self, type: str = None) -> List[Artifact]:
         """
         List all artifacts, optionally filtered by type.
@@ -62,7 +62,7 @@ class ArtifactRegistry:
             )
             artifacts.append(artifact)
         return artifacts
-    
+
     def get(self, artifact_id: str) -> Artifact:
         """
         Retrieve an artifact by its ID.
@@ -80,7 +80,7 @@ class ArtifactRegistry:
             data=self._storage.load(data["asset_path"]),
             type=data["type"],
         )
-    
+
     def delete(self, artifact_id: str) -> None:
         """
         Delete an artifact by its ID.
@@ -90,7 +90,7 @@ class ArtifactRegistry:
         data = self._database.get("artifacts", artifact_id)
         self._storage.delete(data["asset_path"])
         self._database.delete("artifacts", artifact_id)
-    
+
 
 class AutoMLSystem:
     """
@@ -118,14 +118,12 @@ class AutoMLSystem:
         """
         if AutoMLSystem._instance is None:
             AutoMLSystem._instance = AutoMLSystem(
-                LocalStorage("./assets/objects"), 
-                Database(
-                    LocalStorage("./assets/dbo")
-                )
+                LocalStorage("./assets/objects"),
+                Database(LocalStorage("./assets/dbo"))
             )
         AutoMLSystem._instance._database.refresh()
         return AutoMLSystem._instance
-    
+
     @property
     def registry(self) -> ArtifactRegistry:
         """

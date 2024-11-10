@@ -3,7 +3,8 @@ import pandas as pd
 import os
 from app.core.system import AutoMLSystem
 from autoop.core.ml.pipeline import Pipeline
-from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS, get_model
+from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS
+from autoop.core.ml.model import get_model
 from autoop.core.ml.metric import METRICS, get_metric
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
@@ -21,7 +22,8 @@ def write_helper_text(text: str) -> None:
 
 st.write("# ⚙ Modelling")
 write_helper_text(
-    "In this section, you can design a machine learning pipeline to train a model "
+    """In this section, you can design a
+      machine learning pipeline to train a model """
     "on a dataset."
 )
 
@@ -30,17 +32,20 @@ datasets = automl.registry.list(type="dataset")
 
 st.subheader("Available Datasets")
 write_helper_text(
-    "Choose a dataset to use for modelling. The dataset will be used to train the "
+    """Choose a dataset to use for modelling.
+      The dataset will be used to train the """
     "model."
 )
 if datasets:
     dataset_names = [dataset.name for dataset in datasets]
     selected_dataset_name = st.selectbox("Select a dataset", dataset_names)
     selected_dataset = next(
-        dataset for dataset in datasets if dataset.name == selected_dataset_name
+        dataset for dataset in datasets if
+          dataset.name == selected_dataset_name
     )
     st.write(
-        f"Selected Dataset: {selected_dataset.name}, Type: {selected_dataset.type}"
+        f"Selected Dataset: {selected_dataset.name}, Type: {
+            selected_dataset.type}"
     )
 
     if selected_dataset:
@@ -53,8 +58,10 @@ if datasets:
 
             st.subheader("Feature Detection")
             write_helper_text(
-                "Select the input features and the target feature. The target feature "
-                "will be used to detect the task type (classification or regression)."
+                """Select the input features and
+                  the target feature. The target feature """
+                """will be used to detect the task type (
+                classification or regression)."""
             )
             feature_columns = data.columns.tolist()
             input_features = st.multiselect(
@@ -70,9 +77,11 @@ if datasets:
                         "Target feature cannot be selected as input feature."
                     )
                 else:
-                    if (pd.api.types.is_numeric_dtype(data[target_feature]) or
-                        pd.api.types.is_float_dtype(data[target_feature]) and
-                        (data[target_feature].max() - data[target_feature].min() > 1)):
+                    if (pd.api.types.is_numeric_dtype(data[target_feature])
+                        or pd.api.types.is_float_dtype(data[target_feature])
+                        and (data[target_feature].max(
+
+                        ) - data[target_feature].min() > 1)):
                         type = "numerical"
                         available_models = REGRESSION_MODELS
                         available_metrics = METRICS[:3]
@@ -82,12 +91,14 @@ if datasets:
                         available_metrics = METRICS[3:]
                     st.write(f"### Detected task type: {type}")
                     st.info(
-                        f"Task type based on the target feature '{target_feature}': "
+                        f"Task type based on the target feature '{
+                            target_feature}': "
                         f"{type}"
                     )
 
                     st.subheader("Model Selection")
-                    write_helper_text("Select a model based on the task type.")
+                    write_helper_text("Select a model based on the task type."
+                                      )
                     selected_model = st.selectbox(
                         "Select a model", available_models
                     )
@@ -116,7 +127,8 @@ if datasets:
                         "Available Metrics", available_metrics
                     )
                     write_helper_text(
-                        "Choose the metric(s) to evaluate the model's performance."
+                        """Choose the metric(s)
+                          to evaluate the model's performance."""
                     )
 
                     st.subheader("Pipeline Summary")
@@ -152,7 +164,8 @@ if datasets:
                             st.success("Model trained successfully!")
 
                             write_helper_text(
-                                "Press the view results button below to see more details."
+                                """Press the view results button below
+                                  to see more details."""
                             )
 
                             with st.expander("View Results"):
@@ -166,7 +179,8 @@ if datasets:
                         "Save the pipeline to the registry for future use."
                     )
                     st.write(
-                        "The saved pipeline will be trained regardless of whether you "
+                        """The saved pipeline will be trained
+                          regardless of whether you """
                         "pressed the train model button above."
                     )
 
