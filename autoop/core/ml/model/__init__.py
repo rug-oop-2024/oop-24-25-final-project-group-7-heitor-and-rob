@@ -2,6 +2,7 @@
 from autoop.core.ml.model.model import Model
 from autoop.core.ml.model.regression.linear_regression_model import LinearRegression
 from autoop.core.ml.model.regression.multiple_linear_regression_model import MultipleLinearRegression
+from autoop.core.ml.model.regression.lasso_model import Lasso
 from autoop.core.ml.model.classification.KNN_model import KNearestNeighbors
 from autoop.core.ml.model.classification.logistic_regression_model import LogisticRegression
 from autoop.core.ml.model.classification.random_forest_model import RandomForest
@@ -9,6 +10,7 @@ from autoop.core.ml.model.classification.random_forest_model import RandomForest
 REGRESSION_MODELS = [
     "linear_regression",
     "multiple_linear_regression",
+    "lasso"
 ]  # add your models as str here
 
 CLASSIFICATION_MODELS = [
@@ -28,7 +30,8 @@ def get_model(task_type: str, model_name: str, **hyperparameters) -> Model:
         },
         "regression": {
             "multiple_linear_regression": MultipleLinearRegression,
-            "linear_regression": LinearRegression
+            "linear_regression": LinearRegression,
+            "lasso": Lasso
         },
     }
 
