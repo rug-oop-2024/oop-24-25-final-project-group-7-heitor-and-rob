@@ -49,7 +49,7 @@ if datasets:
         dataset = next(
             (d for d in datasets if d.name == dataset_to_delete), None)
         if dataset:
-            automl.registry.remove(dataset)
+            automl.registry.delete(dataset.id)
             st.success(f"Dataset {dataset_to_delete} deleted successfully!")
             st.rerun()
 else:
