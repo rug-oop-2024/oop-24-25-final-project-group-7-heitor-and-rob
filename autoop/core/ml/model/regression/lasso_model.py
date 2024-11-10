@@ -12,7 +12,7 @@ class Lasso(Model):
 
     def __init__(
             self, alpha: float = 1.0,
-              name: str = "Lasso", type: str = "regression") -> None:
+            name: str = "Lasso", type: str = "regression") -> None:
         """
         Initialize the Lasso model with given hyperparameters.
 
@@ -52,7 +52,8 @@ class Lasso(Model):
         """
         if self._model is None:
             raise ValueError(
-                "Model has not been initialized. Call `initialize_model()` first.")
+                """Model has not been initialized.
+                  Call `initialize_model()` first.""")
 
         self._model.fit(observations, ground_truth)
         self.parameters = {

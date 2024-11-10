@@ -23,8 +23,7 @@ def write_helper_text(text: str) -> None:
 st.write("# ⚙ Modelling")
 write_helper_text(
     """In this section, you can design a
-      machine learning pipeline to train a model """
-    "on a dataset."
+      machine learning pipeline to train a model on a dataset."""
 )
 
 automl = AutoMLSystem.get_instance()
@@ -44,8 +43,7 @@ if datasets:
           dataset.name == selected_dataset_name
     )
     st.write(
-        f"Selected Dataset: {selected_dataset.name}, Type: {
-            selected_dataset.type}"
+        f"Selected Dataset: {selected_dataset.name}, Type: {selected_dataset.type}"
     )
 
     if selected_dataset:

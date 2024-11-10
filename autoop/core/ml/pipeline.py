@@ -62,13 +62,13 @@ class Pipeline:
         self._artifacts = {}
         self._split = split
         if (target_feature.type == "categorical"
-                and model.type != "classification"):
+            and model.type != "classification"):
             raise ValueError(
                 """Model type must be classification
                   for categorical target feature"""
             )
         if (target_feature.type == "continuous"
-                and model.type != "regression"):
+            and model.type != "regression"):
             raise ValueError(
                 "Model type must be regression for continuous target feature"
             )
@@ -123,7 +123,7 @@ Pipeline(
         )
         return artifacts
 
-    def _register_artifact(self, name: str, artifact: Any) -> None:
+    def _register_artifact(self, name: str, artifact: Dict[str, Any]) -> None:
         """
         Registers an artifact with the given name.
 
@@ -131,7 +131,7 @@ Pipeline(
         ----------
         name : str
             The name of the artifact.
-        artifact : Any
+        artifact : Dict[str, Any]
             The artifact to be registered.
         """
         self._artifacts[name] = artifact
