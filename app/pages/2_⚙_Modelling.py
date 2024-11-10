@@ -2,36 +2,44 @@ import streamlit as st
 import pandas as pd
 
 from app.core.system import AutoMLSystem
-from autoop.core.ml.dataset import Dataset
 from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS, get_model
 from autoop.core.ml.metric import METRICS, get_metric
-
+from autoop.core.ml.pipeline import Pipeline
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
 
 
 def write_helper_text(text: str):
+    """
+    Write helper text in a styled format.
+
+    :param text: The text to display as helper text.
+    :type text: str
+    """
     st.write(f"<p style=\"color: #888;\">{text}</p>", unsafe_allow_html=True)
 
 
 st.write("# ⚙ Modelling")
 write_helper_text(
-    "In this section, you can design a machine learning pipeline to train a model on a dataset.")
+    "In this section, you can design a machine learning pipeline to train a model on a dataset."
+)
 
 automl = AutoMLSystem.get_instance()
-
 datasets = automl.registry.list(type="dataset")
 
 st.subheader("Available Datasets")
 write_helper_text(
-    "Choose a dataset to use for modelling. The dataset will be used to train the model.")
+    "Choose a dataset to use for modelling. The dataset will be used to train the model."
+)
 if datasets:
     dataset_names = [dataset.name for dataset in datasets]
     selected_dataset_name = st.selectbox("Select a dataset", dataset_names)
     selected_dataset = next(
-        dataset for dataset in datasets if dataset.name == selected_dataset_name)
+        dataset for dataset in datasets if dataset.name == selected_dataset_name
+    )
     st.write(
-        f"Selected Dataset: {selected_dataset.name}, Type: {selected_dataset.type}")
+        f"Selected Dataset: {selected_dataset.name}, Type: {selected_dataset.type}"
+    )
 
     if selected_dataset:
         st.write(f"### Selected Dataset: {selected_dataset.name}")
@@ -43,19 +51,31 @@ if datasets:
 
             st.subheader("Feature Detection")
             write_helper_text(
-                "Select the input features and the target feature. The target feature will be used to detect the task type (classification or regression).")
+                """Select the input features and the target feature.
+                  The target feature will be used to detect the task type (classification or regression)."""
+            )
             feature_columns = data.columns.tolist()
             input_features = st.multiselect(
-                "Select Input Features", feature_columns)
+                "Select Input Features", feature_columns
+            )
             target_feature = st.selectbox(
-                "Select Target Feature", feature_columns)
+                "Select Target Feature", feature_columns
+            )
 
             if input_features and target_feature:
                 if target_feature in input_features:
                     st.error(
-                        "Target feature cannot be selected as input feature.")
+                        "Target feature cannot be selected as input feature."
+                    )
                 else:
-                    if pd.api.types.is_numeric_dtype(data[target_feature]) or pd.api.types.is_float_dtype(data[target_feature]) and (data[target_feature].max() - data[target_feature].min() > 1):
+                    if pd.api.types.is_numeric_dtype(data[target_feature]
+                                                     ) or pd.api.types.is_float_dtype(
+                                                         data[target_feature]) and (
+                                                             data[target_feature].max(
+                                                                 
+                                                             ) - data[target_feature].min(
+                                                                 
+                                                             ) > 1):
                         type = "numerical"
                         available_models = REGRESSION_MODELS
                         available_metrics = METRICS[:3]
@@ -65,22 +85,26 @@ if datasets:
                         available_metrics = METRICS[3:]
                     st.write(f"### Detected task type: {type}")
                     st.info(
-                        f"Task type based on the target feature '{target_feature}': {type}")
+                        f"Task type based on the target feature '{target_feature}': {type}"
+                    )
 
                     st.subheader("Model Selection")
                     write_helper_text("Select a model based on the task type.")
                     selected_model = st.selectbox(
-                        "Select a model", available_models)
+                        "Select a model", available_models
+                    )
 
                     if selected_model:
                         st.write(
-                            f"Selected model: {selected_model}")
+                            f"Selected model: {selected_model}"
+                        )
                     else:
                         st.write("No models available.")
 
                     st.subheader("Select Dataset Split")
                     write_helper_text(
-                        "Choose a split ratio for training and testing data.")
+                        "Choose a split ratio for training and testing data."
+                    )
                     split_ratio = st.slider(
                         "Training/Test Data Split Ratio",
                         min_value=0.1,
@@ -91,13 +115,16 @@ if datasets:
 
                     st.subheader("Select Metrics")
                     metrics = st.multiselect(
-                        "Available Metrics", available_metrics)
+                        "Available Metrics", available_metrics
+                    )
                     write_helper_text(
-                        "Choose the metric(s) to evaluate the model's performance.")
+                        "Choose the metric(s) to evaluate the model's performance."
+                    )
 
                     st.subheader("Pipeline Summary")
                     write_helper_text(
-                        "Make sure pipeline configurations are correct.")
+                        "Make sure pipeline configurations are correct."
+                    )
                     st.markdown(
                         f"""
                         - Dataset: {selected_dataset.name}
@@ -110,6 +137,14 @@ if datasets:
                     )
                     model = get_model(name=selected_model)
                     metrics = [get_metric(metric) for metric in metrics]
+                    pipeline = Pipeline(metrics=metrics, dataset=selected_dataset, model=model,
+                                        input_features=input_features,
+                                        target_feature=target_feature, split=split_ratio)
+
+                    if st.button("Execute Pipeline"):
+                        dic = pipeline.execute()
+                        st.success("Pipeline executed successfully!")
+                        st.json(dic)
 
         except FileNotFoundError:
             st.error("Dataset file not found.")

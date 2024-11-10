@@ -18,11 +18,4 @@ Final Project OOP Group 7 Heitor and Rob documentation
    contributing
    changelog
 
-# Add autodoc directives to include your modules and classes
-.. automodule:: my_module
-   :members:
-   :undoc-members:
-   :private-members:
-   :special-members: __init__
-   :inherited-members:
-   :show-inheritance:
+

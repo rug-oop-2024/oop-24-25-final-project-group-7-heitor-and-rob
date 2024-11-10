@@ -1,9 +1,18 @@
 from autoop.core.ml.artifact import Artifact
 import streamlit as st
 
-st.set_page_config(
-    page_title="Instructions",
-    page_icon="👋",
-)
+def main():
+    """
+    Set up the Streamlit page configuration and display the instructions.
+    """
+    st.set_page_config(
+        page_title="Instructions",
+        page_icon="👋",
+    )
 
-st.markdown(open("INSTRUCTIONS.md").read())
+    with open("INSTRUCTIONS.md") as file:
+        instructions = file.read()
+    st.markdown(instructions)
+
+if __name__ == "__main__":
+    main()
