@@ -1,4 +1,3 @@
-from sklearn.linear_model import LinearRegression
 from autoop.core.ml.model.model import Model
 import numpy as np
 
@@ -27,7 +26,8 @@ class MultipleLinearRegression(Model):
         super().__init__(**hyperparameters)
         self.type = "regression"
         self.parameters = {}
-        self.initialize_model()
+        self.weights = None
+        self.bias = None
 
     def initialize_model(self):
         """
@@ -38,7 +38,8 @@ class MultipleLinearRegression(Model):
         LinearRegression
             An instance of Scikit-learn's LinearRegression model.
         """
-        return LinearRegression(**self._hyperparameters)
+        self.weights = None
+        self.bias = 0
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
         """
