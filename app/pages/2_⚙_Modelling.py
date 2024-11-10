@@ -47,9 +47,6 @@ if datasets:
     st.write(
         f"Selected Dataset: {selected_dataset.name}, Type: {selected_dataset.type}")
 
-    st.write(
-        f"Selected Dataset: {selected_dataset.name}, Type: {selected_dataset.type}")
-
     if selected_dataset:
         st.write(f"### Selected Dataset: {selected_dataset.name}")
         st.write(f"Type: {selected_dataset.type}")
@@ -77,8 +74,6 @@ if datasets:
 
             target_feature_type = next(
                 feature.type for feature in features if feature.name == target_feature)
-
-            st.write("Debug: Target feature type:", target_feature_type)
 
             if target_feature_type == "numerical":
                 task_type = "regression"
