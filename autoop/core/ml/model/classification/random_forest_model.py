@@ -40,7 +40,7 @@ class RandomForest(Model):
         self.n_trees = n_trees
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
-        self._hyperparameters = {
+        self._parameters = {
             "n_estimators": self.n_trees,
             "max_depth": self.max_depth,
             "min_samples_split": self.min_samples_split,
@@ -52,7 +52,7 @@ class RandomForest(Model):
         Initializes the RandomForestClassifier with the specified
         hyperparameters.
         """
-        self._model = RandomForestClassifier(**self._hyperparameters)
+        self._model = RandomForestClassifier(**self._parameters)
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
@@ -71,8 +71,7 @@ class RandomForest(Model):
             )
         self._model.fit(X, y)
         self.parameters = {
-            "strict_parameters": deepcopy(self._model.get_params()),
-            "hyperparameters": self._hyperparameters
+            "strict_parameters": deepcopy(self._model.get_params())
         }
 
     def predict(self, X: np.ndarray) -> np.ndarray:

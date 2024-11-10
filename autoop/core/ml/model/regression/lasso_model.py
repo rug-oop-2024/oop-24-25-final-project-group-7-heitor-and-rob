@@ -10,7 +10,7 @@ class Lasso(Model):
     This model is used for linear regression with L1 regularization.
     """
 
-    def __init__(self, alpha: float = 1.0, name: str = "Lasso", type: str = "regression", **hyperparameters) -> None:
+    def __init__(self, alpha: float = 1.0, name: str = "Lasso", type: str = "regression") -> None:
         """
         Initialize the Lasso model with given hyperparameters.
 
@@ -20,9 +20,8 @@ class Lasso(Model):
         :param hyperparameters: Additional hyperparameters.
         """
         super().__init__(name=name, type=type)
-        self._hyperparameters = {
-            "alpha": alpha,
-            **hyperparameters
+        self._parameters = {
+            "alpha": alpha
         }
         self._model = None
 
@@ -30,16 +29,16 @@ class Lasso(Model):
         """
         Initialize the Lasso model with the specified hyperparameters.
         """
-        self._model = SklearnLasso(**self._hyperparameters)
+        self._model = SklearnLasso(**self._parameters)
 
     @property
-    def hyperparameters(self) -> dict:
+    def parameters(self) -> dict:
         """
         Get the hyperparameters of the model.
 
         :return: A dictionary of hyperparameters.
         """
-        return deepcopy(self._hyperparameters)
+        return deepcopy(self._parameters)
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
         """
@@ -56,8 +55,7 @@ class Lasso(Model):
         self._model.fit(observations, ground_truth)
         self.parameters = {
             "coef_": deepcopy(self._model.coef_),
-            "intercept_": deepcopy(self._model.intercept_),
-            "hyperparameters": self._hyperparameters
+            "intercept_": deepcopy(self._model.intercept_)
         }
 
     def predict(self, observations: np.ndarray) -> np.ndarray:

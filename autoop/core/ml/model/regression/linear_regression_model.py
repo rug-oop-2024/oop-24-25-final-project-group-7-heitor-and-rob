@@ -12,10 +12,12 @@ class LinearRegression(Model):
     """
 
     def __init__(
-        self, 
-        learning_rate: float = 0.01, 
-        num_iterations: int = 1000, 
-        use_gradient_descent: bool = True, 
+        self,
+        name: str = "Linear Regression",
+        type: str = "regression",
+        learning_rate: float = 0.01,
+        num_iterations: int = 1000,
+        use_gradient_descent: bool = True,
         **hyperparameters
     ) -> None:
         """
@@ -29,8 +31,7 @@ class LinearRegression(Model):
             **hyperparameters: Arbitrary keyword arguments for model
                                hyperparameters.
         """
-        super().__init__(**hyperparameters)
-        self.type = "regression"
+        super().__init__(name=name, type=type)
         self.learning_rate = learning_rate
         self.num_iterations = num_iterations
         self.use_gradient_descent = use_gradient_descent

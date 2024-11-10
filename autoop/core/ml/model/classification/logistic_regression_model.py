@@ -5,8 +5,7 @@ from autoop.core.ml.model.model import Model
 class LogisticRegression(Model):
     """Logistic Regression classifier."""
 
-    def __init__(self, learning_rate: float = 0.01, num_iterations: int = 1000, 
-                 **hyperparameters) -> None:
+    def __init__(self, name="Logistic Regression", type="classification", learning_rate: float = 0.01, num_iterations: int = 1000) -> None:
         """
         Initialize the Logistic Regression model.
 
@@ -15,8 +14,7 @@ class LogisticRegression(Model):
             num_iterations (int): Number of iterations for training.
             **hyperparameters: Additional hyperparameters.
         """
-        super().__init__(**hyperparameters)
-        self.type = "classification"
+        super().__init__(name=name, type=type)
         self.learning_rate = learning_rate
         self.num_iterations = num_iterations
         self.parameters = {}

@@ -14,7 +14,7 @@ class MultipleLinearRegression(Model):
         A dictionary to store the model parameters.
     """
 
-    def __init__(self, **hyperparameters):
+    def __init__(self, name: str = "Multiple Linear Regression", type: str = "regression"):
         """
         Initialize the MultipleLinearRegression model with given hyperparameters.
 
@@ -23,7 +23,7 @@ class MultipleLinearRegression(Model):
         hyperparameters : dict
             Hyperparameters for the LinearRegression model.
         """
-        super().__init__(**hyperparameters)
+        super().__init__(name=name, type=type)
         self.type = "regression"
         self.parameters = {}
         self.weights = None

@@ -14,7 +14,7 @@ class Model(ABC):
         parameters: The parameters of the model after fitting.
     """
 
-    def __init__(self, **hyperparameters):
+    def __init__(self, name: str, type: str):
         """
         Initialize the model with given hyperparameters.
 
@@ -23,7 +23,6 @@ class Model(ABC):
         """
         self._model = None
         self.type = None
-        self._hyperparameters = deepcopy(hyperparameters)
         self.parameters = None
 
     def initialize_model(self) -> None:
