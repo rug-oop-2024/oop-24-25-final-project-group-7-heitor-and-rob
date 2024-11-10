@@ -2,9 +2,6 @@
 from abc import abstractmethod, ABC
 import numpy as np
 from copy import deepcopy
-from typing import Literal, Any
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import LogisticRegression
 
 
 class Model(ABC):
@@ -14,7 +11,6 @@ class Model(ABC):
         self._hyperparameters = deepcopy(hyperparameters)
         self.parameters = None
 
-    @abstractmethod
     def initialize_model(self) -> None:
         pass
 
