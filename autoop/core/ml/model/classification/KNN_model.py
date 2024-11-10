@@ -54,8 +54,6 @@ class KNearestNeighbors(Model):
         Raises:
             ValueError: If the provided value is not a dictionary.
         """
-        if not isinstance(value, dict):
-            raise ValueError("Parameters should be provided as a dictionary.")
         self._parameters = value
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:

@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
-
+import os
 from app.core.system import AutoMLSystem
+from autoop.core.ml.pipeline import Pipeline
+from autoop.core.ml.dataset import Dataset
 from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS, get_model
 from autoop.core.ml.metric import METRICS, get_metric
 from autoop.core.ml.pipeline import Pipeline
@@ -72,9 +74,9 @@ if datasets:
                                                      ) or pd.api.types.is_float_dtype(
                                                          data[target_feature]) and (
                                                              data[target_feature].max(
-                                                                 
+
                                                              ) - data[target_feature].min(
-                                                                 
+
                                                              ) > 1):
                         type = "numerical"
                         available_models = REGRESSION_MODELS
@@ -135,20 +137,59 @@ if datasets:
                         - Metrics: {', '.join(metrics)}
                         """
                     )
-                    model = get_model(name=selected_model)
+                    model = get_model(selected_model)
                     metrics = [get_metric(metric) for metric in metrics]
-                    pipeline = Pipeline(metrics=metrics, dataset=selected_dataset, model=model,
-                                        input_features=input_features,
-                                        target_feature=target_feature, split=split_ratio)
+                    pipeline = Pipeline(
+                        model=model,
+                        metrics=metrics,
+                        dataset=selected_dataset,
+                        input_features=input_features,
+                        target_feature=target_feature,
+                        split=split_ratio
+                    )
 
-                    if st.button("Execute Pipeline"):
-                        dic = pipeline.execute()
-                        st.success("Pipeline executed successfully!")
-                        st.json(dic)
+                    if st.button("Train Model"):
+                        st.write("Training model...")
+                        try:
+                            results = pipeline.execute()
+                            st.success("Model trained successfully!")
+
+                            write_helper_text(
+                                "Press the view results button below to see more details.")
+
+                            with st.expander("View Results"):
+                                st.json(pipeline._evaluate())
+
+                        except Exception as e:
+                            st.error(f"Error training model: {str(e)}")
+
+                    st.subheader("Save Pipeline")
+                    write_helper_text(
+                        "Save the pipeline to the registry for future use.")
+                    st.write(
+                        "The saved pipeline will be trained regardless of whether you pressed the train model button above.")
+
+                    pipeline_name = st.text_input("Pipeline Name")
+                    if st.button("Save Pipeline"):
+                        st.write("Saving pipeline...")
+                        results = pipeline.execute()
+                        pipeline_dir = "assets/pipelines"
+                        if not os.path.exists(pipeline_dir):
+                            os.makedirs(pipeline_dir)
+
+                        pipeline_path = os.path.join(
+                            pipeline_dir, f"{pipeline_name}.pkl")
+                        with open(pipeline_path, 'wb') as f:
+                            try:
+                                automl.registry.save(pipeline)
+                                st.success("Pipeline saved successfully!")
+                            except Exception as e:
+                                st.error(f"Error saving pipeline: {str(e)}")
 
         except FileNotFoundError:
             st.error("Dataset file not found.")
         except Exception as e:
-            st.error(f"Error reading dataset: {str(e)}")
+            st.error(
+                f"Error reading dataset: {str(e)}, the problem is with {e}")
     else:
         st.write("No datasets available.")
