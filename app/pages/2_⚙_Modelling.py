@@ -76,7 +76,6 @@ if datasets:
             target_feature_type = next(
                 feature.type for feature in features if feature.name == target_feature)
 
-
             if target_feature_type == "numerical":
                 task_type = "regression"
                 available_models = REGRESSION_MODELS
