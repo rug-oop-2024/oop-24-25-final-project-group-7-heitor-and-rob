@@ -58,8 +58,6 @@ if datasets:
             st.write("### Data Preview")
             st.dataframe(data.head())
 
-            st.write("Debug: Type of data:", type(data))
-
             features = detect_feature_types(selected_dataset)
             feature_names = [feature.name for feature in features]
 
@@ -174,34 +172,6 @@ if datasets:
 
                 except Exception as e:
                     st.error(f"Error training model: {str(e)}")
-
-            st.subheader("Save Pipeline")
-            write_helper_text(
-                "Save the pipeline to the registry for future use."
-            )
-            st.write(
-                """The saved pipeline will be trained
-                    regardless of whether you """
-                "pressed the train model button above."
-            )
-
-            pipeline_name = st.text_input("Pipeline Name")
-            if st.button("Save Pipeline"):
-                st.write("Saving pipeline...")
-                results = pipeline.execute()
-                pipeline_dir = "assets/pipelines"
-                if not os.path.exists(pipeline_dir):
-                    os.makedirs(pipeline_dir)
-
-                pipeline_path = os.path.join(
-                    pipeline_dir, f"{pipeline_name}.pkl"
-                )
-                with open(pipeline_path, 'wb') as f:
-                    try:
-                        automl.registry.save(pipeline)
-                        st.success("Pipeline saved successfully!")
-                    except Exception as e:
-                        st.error(f"Error saving pipeline: {str(e)}")
 
         except FileNotFoundError:
             st.error("Dataset file not found.")
