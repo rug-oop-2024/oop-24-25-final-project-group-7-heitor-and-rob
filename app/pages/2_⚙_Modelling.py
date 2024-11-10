@@ -61,7 +61,7 @@ if datasets:
                     st.info(
                         f"Task type based on the target feature '{target_feature}': {type}")
 
-                    st.subheader("Select a model")
+                    st.subheader("Model Selection")
                     selected_model = st.selectbox(
                         "Select a model", available_models)
 
