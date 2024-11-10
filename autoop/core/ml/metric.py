@@ -51,7 +51,7 @@ class Metric(ABC):
     """
     @abstractmethod
     def evaluate(
-        self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
+            self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
         Evaluate the metric.
 
@@ -69,6 +69,7 @@ class Accuracy(Metric):
     """
     Class to evaluate the accuracy metric.
     """
+
     def evaluate(
             self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
@@ -88,6 +89,7 @@ class MeanSquaredError(Metric):
     """
     Class to evaluate the mean squared error metric.
     """
+
     def evaluate(
             self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
@@ -107,6 +109,7 @@ class RootMeanSquaredError(MeanSquaredError):
     """
     Class to evaluate the root mean squared error metric.
     """
+
     def evaluate(
             self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
@@ -126,6 +129,7 @@ class Rsquared(Metric):
     """
     Class to evaluate the R-squared metric.
     """
+
     def evaluate(
             self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
@@ -148,6 +152,7 @@ class Precision(Metric):
     """
     Class to evaluate the precision metric.
     """
+
     def evaluate(
             self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
@@ -178,6 +183,7 @@ class Recall(Metric):
     """
     Class to evaluate the recall metric.
     """
+
     def evaluate(
             self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
