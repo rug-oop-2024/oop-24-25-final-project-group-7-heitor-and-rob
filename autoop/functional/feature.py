@@ -1,4 +1,3 @@
-
 import pandas as pd
 from typing import List
 from autoop.core.ml.dataset import Dataset
@@ -6,11 +5,19 @@ from autoop.core.ml.feature import Feature
 
 
 def detect_feature_types(dataset: Dataset) -> List[Feature]:
-    """Assumption: only categorical and numeric features and no NaN values.
+    """
+    Detects feature types in the dataset.
+
+    Assumption: only categorical and numeric features and no NaN values.
+
     Args:
-        dataset: Dataset
+        dataset (Dataset): The dataset to analyze.
+
     Returns:
         List[Feature]: List of features with their types.
+
+    Raises:
+        ValueError: If dataset is not an instance of Dataset or if dataset has no data to read.
     """
     if not isinstance(dataset, Dataset):
         raise ValueError("dataset must be an instance of Dataset")
@@ -26,7 +33,6 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
     for column in df.columns:
         col_data = df[column]
 
-        # here we're checking if the values in the column are numeric and if the range of the values in that column is wider than 1 (indication of continuous data)
         if pd.api.types.is_numeric_dtype(col_data) or pd.api.types.is_float_dtype(col_data) and (col_data.max() - col_data.min() > 1):
             feature_type = "numerical"
         else:

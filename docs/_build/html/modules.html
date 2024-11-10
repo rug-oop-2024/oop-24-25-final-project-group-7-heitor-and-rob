@@ -1,0 +1,616 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>oop-24-25-final-project-group-7-heitor-and-rob &mdash; Final Project OOP Group 7 Heitor and Rob  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Final Project OOP Group 7 Heitor and Rob documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Final Project OOP Group 7 Heitor and Rob
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">oop-24-25-final-project-group-7-heitor-and-rob</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-app.core.system">App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app.core.system.ArtifactRegistry"><code class="docutils literal notranslate"><span class="pre">ArtifactRegistry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#app.core.system.ArtifactRegistry.__init__"><code class="docutils literal notranslate"><span class="pre">ArtifactRegistry.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.core.system.ArtifactRegistry.delete"><code class="docutils literal notranslate"><span class="pre">ArtifactRegistry.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.core.system.ArtifactRegistry.get"><code class="docutils literal notranslate"><span class="pre">ArtifactRegistry.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.core.system.ArtifactRegistry.list"><code class="docutils literal notranslate"><span class="pre">ArtifactRegistry.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.core.system.ArtifactRegistry.register"><code class="docutils literal notranslate"><span class="pre">ArtifactRegistry.register()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#app.core.system.AutoMLSystem"><code class="docutils literal notranslate"><span class="pre">AutoMLSystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#app.core.system.AutoMLSystem.__init__"><code class="docutils literal notranslate"><span class="pre">AutoMLSystem.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.core.system.AutoMLSystem.get_instance"><code class="docutils literal notranslate"><span class="pre">AutoMLSystem.get_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.core.system.AutoMLSystem.registry"><code class="docutils literal notranslate"><span class="pre">AutoMLSystem.registry</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#autoop-core">AutoOP Core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#autoop.core.database.Database"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.database.Database.__init__"><code class="docutils literal notranslate"><span class="pre">Database.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.database.Database._load"><code class="docutils literal notranslate"><span class="pre">Database._load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.database.Database._persist"><code class="docutils literal notranslate"><span class="pre">Database._persist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.database.Database.delete"><code class="docutils literal notranslate"><span class="pre">Database.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.database.Database.get"><code class="docutils literal notranslate"><span class="pre">Database.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.database.Database.list"><code class="docutils literal notranslate"><span class="pre">Database.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.database.Database.refresh"><code class="docutils literal notranslate"><span class="pre">Database.refresh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.database.Database.set"><code class="docutils literal notranslate"><span class="pre">Database.set()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#autoop.core.storage.LocalStorage"><code class="docutils literal notranslate"><span class="pre">LocalStorage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.LocalStorage.__init__"><code class="docutils literal notranslate"><span class="pre">LocalStorage.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.LocalStorage._assert_path_exists"><code class="docutils literal notranslate"><span class="pre">LocalStorage._assert_path_exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.LocalStorage._join_path"><code class="docutils literal notranslate"><span class="pre">LocalStorage._join_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.LocalStorage.delete"><code class="docutils literal notranslate"><span class="pre">LocalStorage.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.LocalStorage.list"><code class="docutils literal notranslate"><span class="pre">LocalStorage.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.LocalStorage.load"><code class="docutils literal notranslate"><span class="pre">LocalStorage.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.LocalStorage.save"><code class="docutils literal notranslate"><span class="pre">LocalStorage.save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#autoop.core.storage.NotFoundError"><code class="docutils literal notranslate"><span class="pre">NotFoundError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autoop.core.storage.Storage"><code class="docutils literal notranslate"><span class="pre">Storage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.Storage.delete"><code class="docutils literal notranslate"><span class="pre">Storage.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.Storage.list"><code class="docutils literal notranslate"><span class="pre">Storage.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.Storage.load"><code class="docutils literal notranslate"><span class="pre">Storage.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoop.core.storage.Storage.save"><code class="docutils literal notranslate"><span class="pre">Storage.save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#autoop-functional">AutoOP Functional</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#autoop.functional.feature.detect_feature_types"><code class="docutils literal notranslate"><span class="pre">detect_feature_types()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autoop.functional.preprocessing.preprocess_features"><code class="docutils literal notranslate"><span class="pre">preprocess_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Final Project OOP Group 7 Heitor and Rob</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">oop-24-25-final-project-group-7-heitor-and-rob</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="oop-24-25-final-project-group-7-heitor-and-rob">
+<h1>oop-24-25-final-project-group-7-heitor-and-rob<a class="headerlink" href="#oop-24-25-final-project-group-7-heitor-and-rob" title="Link to this heading"></a></h1>
+<section id="module-app.core.system">
+<span id="app"></span><h2>App<a class="headerlink" href="#module-app.core.system" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="app.core.system.ArtifactRegistry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.core.system.</span></span><span class="sig-name descname"><span class="pre">ArtifactRegistry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.database.Database" title="autoop.core.database.Database"><span class="pre">Database</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.storage.Storage" title="autoop.core.storage.Storage"><span class="pre">Storage</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/core/system.html#ArtifactRegistry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.ArtifactRegistry" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A registry for managing artifacts, including saving, listing, retrieving, and deleting artifacts.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.core.system.ArtifactRegistry.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.database.Database" title="autoop.core.database.Database"><span class="pre">Database</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.storage.Storage" title="autoop.core.storage.Storage"><span class="pre">Storage</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/core/system.html#ArtifactRegistry.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.ArtifactRegistry.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the ArtifactRegistry with a database and storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>database</strong> – The database to store artifact metadata.</p></li>
+<li><p><strong>storage</strong> – The storage to save artifact data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.core.system.ArtifactRegistry.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artifact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/core/system.html#ArtifactRegistry.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.ArtifactRegistry.delete" title="Link to this definition"></a></dt>
+<dd><p>Delete an artifact by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>artifact_id</strong> – The ID of the artifact to delete.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.core.system.ArtifactRegistry.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artifact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Artifact</span></span></span><a class="reference internal" href="_modules/app/core/system.html#ArtifactRegistry.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.ArtifactRegistry.get" title="Link to this definition"></a></dt>
+<dd><p>Retrieve an artifact by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>artifact_id</strong> – The ID of the artifact to retrieve.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The retrieved artifact.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.core.system.ArtifactRegistry.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Artifact</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/app/core/system.html#ArtifactRegistry.list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.ArtifactRegistry.list" title="Link to this definition"></a></dt>
+<dd><p>List all artifacts, optionally filtered by type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>type</strong> – The type of artifacts to list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of artifacts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.core.system.ArtifactRegistry.register">
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artifact</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Artifact</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/core/system.html#ArtifactRegistry.register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.ArtifactRegistry.register" title="Link to this definition"></a></dt>
+<dd><p>Register an artifact by saving its data in storage and its metadata in the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>artifact</strong> – The artifact to register.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="app.core.system.AutoMLSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.core.system.</span></span><span class="sig-name descname"><span class="pre">AutoMLSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.storage.LocalStorage" title="autoop.core.storage.LocalStorage"><span class="pre">LocalStorage</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.database.Database" title="autoop.core.database.Database"><span class="pre">Database</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/core/system.html#AutoMLSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.AutoMLSystem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Singleton class for managing the AutoML system, including storage and database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.core.system.AutoMLSystem.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.storage.LocalStorage" title="autoop.core.storage.LocalStorage"><span class="pre">LocalStorage</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.database.Database" title="autoop.core.database.Database"><span class="pre">Database</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/core/system.html#AutoMLSystem.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.AutoMLSystem.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the AutoMLSystem with storage and database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>storage</strong> – The local storage for artifacts.</p></li>
+<li><p><strong>database</strong> – The database for artifact metadata.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.core.system.AutoMLSystem.get_instance">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/core/system.html#AutoMLSystem.get_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.core.system.AutoMLSystem.get_instance" title="Link to this definition"></a></dt>
+<dd><p>Get the singleton instance of the AutoMLSystem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The singleton instance of AutoMLSystem.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="app.core.system.AutoMLSystem.registry">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">registry</span></span><a class="headerlink" href="#app.core.system.AutoMLSystem.registry" title="Link to this definition"></a></dt>
+<dd><p>Get the artifact registry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The artifact registry.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="autoop-core">
+<h2>AutoOP Core<a class="headerlink" href="#autoop-core" title="Link to this heading"></a></h2>
+<dl class="py class" id="module-autoop.core.database">
+<dt class="sig sig-object py" id="autoop.core.database.Database">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autoop.core.database.</span></span><span class="sig-name descname"><span class="pre">Database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.storage.Storage" title="autoop.core.storage.Storage"><span class="pre">Storage</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/database.html#Database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A simple database class that uses a storage backend to persist data.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.database.Database.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#autoop.core.storage.Storage" title="autoop.core.storage.Storage"><span class="pre">Storage</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/database.html#Database.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the database with a storage backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>storage</strong> (<a class="reference internal" href="#autoop.core.storage.Storage" title="autoop.core.storage.Storage"><em>Storage</em></a>) – The storage backend to use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.database.Database._load">
+<span class="sig-name descname"><span class="pre">_load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/database.html#Database._load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database._load" title="Link to this definition"></a></dt>
+<dd><p>Load the data from storage.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.database.Database._persist">
+<span class="sig-name descname"><span class="pre">_persist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/database.html#Database._persist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database._persist" title="Link to this definition"></a></dt>
+<dd><p>Persist the data to storage.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.database.Database.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/database.html#Database.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database.delete" title="Link to this definition"></a></dt>
+<dd><p>Delete a key from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> (<em>str</em>) – The collection to delete the data from.</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – The id of the data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.database.Database.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/autoop/core/database.html#Database.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database.get" title="Link to this definition"></a></dt>
+<dd><p>Get a key from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> (<em>str</em>) – The collection to get the data from.</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – The id of the data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The data that was stored, or None if it doesn’t exist.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[dict, None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.database.Database.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/autoop/core/database.html#Database.list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database.list" title="Link to this definition"></a></dt>
+<dd><p>Lists all data in a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>collection</strong> (<em>str</em>) – The collection to list the data from.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of tuples containing the id and data for each item in the collection.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[str, dict]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.database.Database.refresh">
+<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/database.html#Database.refresh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database.refresh" title="Link to this definition"></a></dt>
+<dd><p>Refresh the database by loading the data from storage.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.database.Database.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/autoop/core/database.html#Database.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.database.Database.set" title="Link to this definition"></a></dt>
+<dd><p>Set a key in the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> (<em>str</em>) – The collection to store the data in.</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – The id of the data.</p></li>
+<li><p><strong>entry</strong> (<em>dict</em>) – The data to store.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The data that was stored.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-autoop.core.storage">
+<dt class="sig sig-object py" id="autoop.core.storage.LocalStorage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autoop.core.storage.</span></span><span class="sig-name descname"><span class="pre">LocalStorage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./assets'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/storage.html#LocalStorage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.LocalStorage" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#autoop.core.storage.Storage" title="autoop.core.storage.Storage"><code class="xref py py-class docutils literal notranslate"><span class="pre">Storage</span></code></a></p>
+<p>Local storage implementation of the Storage abstract base class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.LocalStorage.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./assets'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/storage.html#LocalStorage.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.LocalStorage.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize LocalStorage with a base path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>base_path</strong> (<em>str</em>) – Base path for storage. Defaults to “./assets”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.LocalStorage._assert_path_exists">
+<span class="sig-name descname"><span class="pre">_assert_path_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/storage.html#LocalStorage._assert_path_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.LocalStorage._assert_path_exists" title="Link to this definition"></a></dt>
+<dd><p>Assert that a given path exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to check.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#autoop.core.storage.NotFoundError" title="autoop.core.storage.NotFoundError"><strong>NotFoundError</strong></a> – If the path does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.LocalStorage._join_path">
+<span class="sig-name descname"><span class="pre">_join_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/autoop/core/storage.html#LocalStorage._join_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.LocalStorage._join_path" title="Link to this definition"></a></dt>
+<dd><p>Join a given path with the base path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to join.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Joined path.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.LocalStorage.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/storage.html#LocalStorage.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.LocalStorage.delete" title="Link to this definition"></a></dt>
+<dd><p>Delete data at a given key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – Key to delete data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.LocalStorage.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/autoop/core/storage.html#LocalStorage.list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.LocalStorage.list" title="Link to this definition"></a></dt>
+<dd><p>List all keys under a given prefix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prefix</strong> (<em>str</em>) – Prefix to list keys.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of keys.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.LocalStorage.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/autoop/core/storage.html#LocalStorage.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.LocalStorage.load" title="Link to this definition"></a></dt>
+<dd><p>Load data from a given key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – Key to load data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.LocalStorage.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/storage.html#LocalStorage.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.LocalStorage.save" title="Link to this definition"></a></dt>
+<dd><p>Save data to a given key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>bytes</em>) – Data to save.</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – Key to save data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="autoop.core.storage.NotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autoop.core.storage.</span></span><span class="sig-name descname"><span class="pre">NotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/storage.html#NotFoundError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.NotFoundError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autoop.core.storage.Storage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autoop.core.storage.</span></span><span class="sig-name descname"><span class="pre">Storage</span></span><a class="reference internal" href="_modules/autoop/core/storage.html#Storage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.Storage" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for storage systems.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.Storage.delete">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/storage.html#Storage.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.Storage.delete" title="Link to this definition"></a></dt>
+<dd><p>Delete data at a given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to delete data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.Storage.list">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/autoop/core/storage.html#Storage.list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.Storage.list" title="Link to this definition"></a></dt>
+<dd><p>List all paths under a given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of paths.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.Storage.load">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/autoop/core/storage.html#Storage.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.Storage.load" title="Link to this definition"></a></dt>
+<dd><p>Load data from a given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to load data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autoop.core.storage.Storage.save">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/autoop/core/storage.html#Storage.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.core.storage.Storage.save" title="Link to this definition"></a></dt>
+<dd><p>Save data to a given path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>bytes</em>) – Data to save.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to save data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="autoop-functional">
+<h2>AutoOP Functional<a class="headerlink" href="#autoop-functional" title="Link to this heading"></a></h2>
+<dl class="py function" id="module-autoop.functional.feature">
+<dt class="sig sig-object py" id="autoop.functional.feature.detect_feature_types">
+<span class="sig-prename descclassname"><span class="pre">autoop.functional.feature.</span></span><span class="sig-name descname"><span class="pre">detect_feature_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Feature</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/autoop/functional/feature.html#detect_feature_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.functional.feature.detect_feature_types" title="Link to this definition"></a></dt>
+<dd><p>Detects feature types in the dataset.</p>
+<p>Assumption: only categorical and numeric features and no NaN values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataset</strong> (<em>Dataset</em>) – The dataset to analyze.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of features with their types.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Feature]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dataset is not an instance of Dataset or if dataset has no data to read.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function" id="module-autoop.functional.preprocessing">
+<dt class="sig sig-object py" id="autoop.functional.preprocessing.preprocess_features">
+<span class="sig-prename descclassname"><span class="pre">autoop.functional.preprocessing.</span></span><span class="sig-name descname"><span class="pre">preprocess_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Feature</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/autoop/functional/preprocessing.html#preprocess_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#autoop.functional.preprocessing.preprocess_features" title="Link to this definition"></a></dt>
+<dd><p>Preprocess features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<em>List</em><em>[</em><em>Feature</em><em>]</em>) – List of features.</p></li>
+<li><p><strong>dataset</strong> (<em>Dataset</em>) – Dataset object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of preprocessed features. Each ndarray of shape (N, …)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[str, np.ndarray, dict]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Final Project OOP Group 7 Heitor and Rob documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Heitor Brasil Scher dos Santos, Rob Sligter.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

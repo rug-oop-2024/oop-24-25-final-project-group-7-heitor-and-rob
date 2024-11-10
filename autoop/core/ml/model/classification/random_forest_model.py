@@ -6,7 +6,30 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 class RandomForest(Model):
-    def __init__(self, n_trees: int = 100, max_depth: int = None, min_samples_split: int = 2, name: str = "Random Forest", type: str = "classification",) -> None:
+    """
+    RandomForest model for classification tasks.
+
+    Attributes:
+        n_trees (int): Number of trees in the forest.
+        max_depth (int): Maximum depth of the tree.
+        min_samples_split (int): Minimum number of samples required to split an internal node.
+        name (str): Name of the model.
+        type (str): Type of the model.
+        _hyperparameters (dict): Hyperparameters for the RandomForestClassifier.
+        _model (RandomForestClassifier): The RandomForestClassifier instance.
+    """
+
+    def __init__(self, n_trees: int = 100, max_depth: int = None, min_samples_split: int = 2, name: str = "Random Forest", type: str = "classification") -> None:
+        """
+        Initializes the RandomForest model with given hyperparameters.
+
+        Args:
+            n_trees (int): Number of trees in the forest.
+            max_depth (int): Maximum depth of the tree.
+            min_samples_split (int): Minimum number of samples required to split an internal node.
+            name (str): Name of the model.
+            type (str): Type of the model.
+        """
         super().__init__(name=name, type=type)
         self.n_trees = n_trees
         self.max_depth = max_depth
@@ -19,9 +42,22 @@ class RandomForest(Model):
         self._model = None
 
     def initialize_model(self) -> None:
+        """
+        Initializes the RandomForestClassifier with the specified hyperparameters.
+        """
         self._model = RandomForestClassifier(**self._hyperparameters)
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
+        """
+        Fits the RandomForest model to the provided data.
+
+        Args:
+            X (np.ndarray): Training data.
+            y (np.ndarray): Target values.
+
+        Raises:
+            ValueError: If the model has not been initialized.
+        """
         if self._model is None:
             raise ValueError(
                 "Model has not been initialized. Call `initialize_model()` first.")
@@ -32,6 +68,18 @@ class RandomForest(Model):
         }
 
     def predict(self, X: np.ndarray) -> np.ndarray:
+        """
+        Predicts the target values for the provided data.
+
+        Args:
+            X (np.ndarray): Input data.
+
+        Returns:
+            np.ndarray: Predicted target values.
+
+        Raises:
+            ValueError: If the model has not been initialized.
+        """
         if self._model is None:
             raise ValueError(
                 "Model has not been initialized. Call `initialize_model()` first.")

@@ -1,4 +1,3 @@
-
 from autoop.core.ml.model.model import Model
 from autoop.core.ml.model.regression.linear_regression_model import LinearRegression
 from autoop.core.ml.model.regression.multiple_linear_regression_model import MultipleLinearRegression
@@ -11,17 +10,29 @@ REGRESSION_MODELS = [
     "linear_regression",
     "multiple_linear_regression",
     "lasso"
-]  # add your models as str here
+]
 
 CLASSIFICATION_MODELS = [
     "logistic_regression",
     "random_forest",
     "KNN"
-]  # add your models as str here
-
+]
 
 def get_model(task_type: str, model_name: str, **hyperparameters) -> Model:
-    """Factory function to get a model by task type and model name."""
+    """
+    Factory function to get a model by task type and model name.
+
+    Parameters:
+    task_type (str): The type of task ('classification' or 'regression').
+    model_name (str): The name of the model.
+    **hyperparameters: Additional hyperparameters for the model.
+
+    Returns:
+    Model: An instance of the requested model.
+
+    Raises:
+    ValueError: If the task type or model name is not supported.
+    """
     model_map = {
         "classification": {
             "logistic_regression": LogisticRegression,

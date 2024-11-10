@@ -11,6 +11,14 @@ class Lasso(Model):
     """
 
     def __init__(self, alpha: float = 1.0, name: str = "Lasso", type: str = "regression", **hyperparameters) -> None:
+        """
+        Initialize the Lasso model with given hyperparameters.
+
+        :param alpha: Regularization strength.
+        :param name: Name of the model.
+        :param type: Type of the model.
+        :param hyperparameters: Additional hyperparameters.
+        """
         super().__init__(name=name, type=type)
         self._hyperparameters = {
             "alpha": alpha,
@@ -19,13 +27,28 @@ class Lasso(Model):
         self._model = None
 
     def initialize_model(self) -> None:
+        """
+        Initialize the Lasso model with the specified hyperparameters.
+        """
         self._model = SklearnLasso(**self._hyperparameters)
 
     @property
     def hyperparameters(self) -> dict:
+        """
+        Get the hyperparameters of the model.
+
+        :return: A dictionary of hyperparameters.
+        """
         return deepcopy(self._hyperparameters)
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
+        """
+        Fit the Lasso model to the given data.
+
+        :param observations: Training data.
+        :param ground_truth: Target values.
+        :raises ValueError: If the model has not been initialized.
+        """
         if self._model is None:
             raise ValueError(
                 "Model has not been initialized. Call `initialize_model()` first.")
@@ -38,6 +61,13 @@ class Lasso(Model):
         }
 
     def predict(self, observations: np.ndarray) -> np.ndarray:
+        """
+        Predict using the Lasso model.
+
+        :param observations: Samples.
+        :return: Predicted values.
+        :raises ValueError: If the model has not been fitted yet.
+        """
         if self._model is None or not hasattr(self._model, "coef_"):
             raise ValueError("Model has not been fitted yet.")
         return self._model.predict(observations)

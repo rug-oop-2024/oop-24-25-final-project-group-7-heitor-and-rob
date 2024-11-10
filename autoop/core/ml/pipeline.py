@@ -10,16 +10,49 @@ from autoop.functional.preprocessing import preprocess_features
 import numpy as np
 
 
-class Pipeline():
-    
+class Pipeline:
+    """
+    A class used to represent a Machine Learning Pipeline.
+
+    Attributes
+    ----------
+    metrics : List[Metric]
+        A list of metrics to evaluate the model.
+    dataset : Dataset
+        The dataset to be used in the pipeline.
+    model : Model
+        The model to be trained and evaluated.
+    input_features : List[Feature]
+        A list of input features.
+    target_feature : Feature
+        The target feature.
+    split : float
+        The ratio to split the dataset into training and testing sets.
+    """
+
     def __init__(self, 
                  metrics: List[Metric],
                  dataset: Dataset, 
                  model: Model,
                  input_features: List[Feature],
                  target_feature: Feature,
-                 split=0.8,
-                 ):
+                 split=0.8):
+        """
+        Parameters
+        ----------
+        metrics : List[Metric]
+            A list of metrics to evaluate the model.
+        dataset : Dataset
+            The dataset to be used in the pipeline.
+        model : Model
+            The model to be trained and evaluated.
+        input_features : List[Feature]
+            A list of input features.
+        target_feature : Feature
+            The target feature.
+        split : float, optional
+            The ratio to split the dataset into training and testing sets (default is 0.8).
+        """
         self._dataset = dataset
         self._model = model
         self._input_features = input_features
@@ -33,6 +66,9 @@ class Pipeline():
             raise ValueError("Model type must be regression for continuous target feature")
 
     def __str__(self):
+        """
+        Returns a string representation of the Pipeline object.
+        """
         return f"""
 Pipeline(
     model={self._model.type},
@@ -45,11 +81,15 @@ Pipeline(
 
     @property
     def model(self):
+        """
+        Returns the model used in the pipeline.
+        """
         return self._model
 
     @property
     def artifacts(self) -> List[Artifact]:
-        """Used to get the artifacts generated during the pipeline execution to be saved
+        """
+        Returns the artifacts generated during the pipeline execution to be saved.
         """
         artifacts = []
         for name, artifact in self._artifacts.items():
@@ -72,20 +112,34 @@ Pipeline(
         return artifacts
     
     def _register_artifact(self, name: str, artifact):
+        """
+        Registers an artifact with the given name.
+
+        Parameters
+        ----------
+        name : str
+            The name of the artifact.
+        artifact : Any
+            The artifact to be registered.
+        """
         self._artifacts[name] = artifact
 
     def _preprocess_features(self):
+        """
+        Preprocesses the input and target features.
+        """
         (target_feature_name, target_data, artifact) = preprocess_features([self._target_feature], self._dataset)[0]
         self._register_artifact(target_feature_name, artifact)
         input_results = preprocess_features(self._input_features, self._dataset)
         for (feature_name, data, artifact) in input_results:
             self._register_artifact(feature_name, artifact)
-        # Get the input vectors and output vector, sort by feature name for consistency
         self._output_vector = target_data
         self._input_vectors = [data for (feature_name, data, artifact) in input_results]
 
     def _split_data(self):
-        # Split the data into training and testing sets
+        """
+        Splits the data into training and testing sets.
+        """
         split = self._split
         self._train_X = [vector[:int(split * len(vector))] for vector in self._input_vectors]
         self._test_X = [vector[int(split * len(vector)):] for vector in self._input_vectors]
@@ -93,14 +147,33 @@ Pipeline(
         self._test_y = self._output_vector[int(split * len(self._output_vector)):]
 
     def _compact_vectors(self, vectors: List[np.array]) -> np.array:
+        """
+        Compacts a list of vectors into a single numpy array.
+
+        Parameters
+        ----------
+        vectors : List[np.array]
+            A list of numpy arrays to be compacted.
+
+        Returns
+        -------
+        np.array
+            A single numpy array.
+        """
         return np.concatenate(vectors, axis=1)
 
     def _train(self):
+        """
+        Trains the model using the training data.
+        """
         X = self._compact_vectors(self._train_X)
         Y = self._train_y
         self._model.fit(X, Y)
 
     def _evaluate(self):
+        """
+        Evaluates the model using the testing data.
+        """
         X = self._compact_vectors(self._test_X)
         Y = self._test_y
         self._metrics_results = []
@@ -111,6 +184,14 @@ Pipeline(
         self._predictions = predictions
 
     def execute(self):
+        """
+        Executes the pipeline.
+
+        Returns
+        -------
+        dict
+            A dictionary containing the metrics results and predictions.
+        """
         self._preprocess_features()
         self._split_data()
         self._train()
@@ -119,6 +200,5 @@ Pipeline(
             "metrics": self._metrics_results,
             "predictions": self._predictions,
         }
-        
 
-    
+
