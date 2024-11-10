@@ -3,20 +3,13 @@ import base64
 import pickle
 
 
-class Artifact(BaseModel, ABC):
-    name: str = Field()
-    _asset_path: str = PrivateAttr()
-    _version: str = PrivateAttr()
-    _data: bytes = PrivateAttr()
-    _type: str = PrivateAttr()
-    tags: List[str] = Field(default_factory=list)
-
+class Artifact():
     def __init__(self, name: str, asset_path: str, version: str, data: bytes, type: str, tags: Optional[List[str]] = None):
-        super().__init__(name=name, tags=tags or [])
-        self._asset_path = asset_path
-        self._version = version
-        self._data = data
-        self._type = type
+        self.name = name
+        self.asset_path = asset_path
+        self.version = version
+        self.data = data
+        self.type = type
         if tags is not None:
             self.tags = tags
 
@@ -30,9 +23,9 @@ class Artifact(BaseModel, ABC):
     def metadata(self) -> Dict[str, Any]:
         return {
             "id": self.id,
-            "asset_path": self._asset_path,
-            "version": self._version,
-            "type": self._type,
+            "asset_path": self.asset_path,
+            "version": self.version,
+            "type": self.type,
             "tags": self.tags,
             "metadata": {
                 "experiment_id": None,
@@ -40,13 +33,11 @@ class Artifact(BaseModel, ABC):
             }
         }
 
-    @abstractmethod
     def read(self) -> Any:
-        if self._data is None:
+        if self.data is None:
             raise ValueError("No data found in the artifact.")
-        return self._data
+        return self.data
 
-    @abstractmethod
     def save(self, data: Any):
-        with open(self._asset_path, 'wb') as f:
+        with open(self.asset_path, 'wb') as f:
             pickle.dump(self, f)
