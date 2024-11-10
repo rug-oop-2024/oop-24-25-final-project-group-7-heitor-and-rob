@@ -71,6 +71,32 @@ if datasets:
                     else:
                         st.write("No models available.")
 
+                    st.subheader("Select Dataset Split")
+                    split_ratio = st.slider(
+                        "Training/Test Data Split Ratio",
+                        min_value=0.1,
+                        max_value=0.9,
+                        value=0.8,
+                        step=0.1,
+                    )
+
+                    st.subheader("Select Metrics")
+                    metrics = st.multiselect(
+                        "Available Metrics",)
+
+                    st.subheader("Pipeline Summary")
+                    st.write(f"### Pipeline Summary")
+                    st.markdown(
+                        f"""
+                        - Dataset: {selected_dataset.name}
+                        - Input Features: {', '.join(input_features)}
+                        - Target Feature: {target_feature}
+                        - Model: {selected_model}
+                        - Split Ratio: {split_ratio}
+                        - Metrics: {', '.join(metrics)}
+                        """
+                    )
+
         except FileNotFoundError:
             st.error("Dataset file not found.")
         except Exception as e:
