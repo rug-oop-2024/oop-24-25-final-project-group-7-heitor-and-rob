@@ -20,8 +20,6 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
         ValueError: If dataset is not an instance
           of Dataset or if dataset has no data to read.
     """
-    if not isinstance(dataset, Dataset):
-        raise ValueError("dataset must be an instance of Dataset")
 
     df = dataset.read()
 

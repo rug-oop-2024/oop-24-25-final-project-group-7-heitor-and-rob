@@ -1,9 +1,10 @@
 from abc import ABC
 import numpy as np
 from copy import deepcopy
+from autoop.core.ml.artifact import Artifact
 
 
-class Model(ABC):
+class Model(ABC, Artifact):
     """
     Abstract base class for machine learning models.
 
@@ -21,9 +22,7 @@ class Model(ABC):
         Args:
             hyperparameters: Arbitrary keyword arguments for hyperparameters.
         """
-        self._model = None
-        self.type = type
-        self.parameters = None
+        super().__init__(name=name, type=type)
 
     def initialize_model(self) -> None:
         """
