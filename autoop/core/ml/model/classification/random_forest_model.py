@@ -45,13 +45,6 @@ class RandomForest(Model):
             "max_depth": self.max_depth,
             "min_samples_split": self.min_samples_split,
         }
-        self._model = None
-
-    def initialize_model(self) -> None:
-        """
-        Initializes the RandomForestClassifier with the specified
-        hyperparameters.
-        """
         self._model = RandomForestClassifier(**self._parameters)
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:

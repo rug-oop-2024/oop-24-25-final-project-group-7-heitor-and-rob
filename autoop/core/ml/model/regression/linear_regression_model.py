@@ -24,6 +24,7 @@ class LinearRegression(Model):
             X (np.ndarray): Training data of shape (n_samples, n_features).
             y (np.ndarray): Target values of shape (n_samples,).
         """
+        y = y.flatten()
         if X.ndim == 1:
             X = X.reshape(-1, 1)
 
