@@ -5,6 +5,8 @@ from autoop.core.ml.model.regression.lasso_model import Lasso
 from autoop.core.ml.model.classification.KNN_model import KNearestNeighbors
 from autoop.core.ml.model.classification.logistic_regression_model import LogisticRegression
 from autoop.core.ml.model.classification.random_forest_model import RandomForest
+from typing import Type
+
 
 REGRESSION_MODELS = [
     "linear_regression",
@@ -18,7 +20,8 @@ CLASSIFICATION_MODELS = [
     "KNN"
 ]
 
-def get_model(task_type: str, model_name: str, **hyperparameters) -> Model:
+
+def get_model(name: str) -> Type[Model]:
     """
     Factory function to get a model by task type and model name.
 
@@ -46,15 +49,10 @@ def get_model(task_type: str, model_name: str, **hyperparameters) -> Model:
         },
     }
 
-    if task_type not in model_map:
+    if name not in model_map:
         raise ValueError(
-            f"Unsupported task type '{task_type}'. Choose either 'classification' or 'regression'.")
+            f"Unsupported task type: {name}. Supported task types are: {list(model_map.keys())}")
 
-    task_models = model_map[task_type]
-    if model_name not in task_models:
-        available_models = CLASSIFICATION_MODELS if task_type == "classification" else REGRESSION_MODELS
-        raise ValueError(
-            f"{task_type.capitalize()} model '{model_name}' is not supported. Available models: {available_models}")
-
-    model = task_models[model_name]
-    return Model(task_type=task_type, model=model, **hyperparameters)
+    model = model_map[name]
+    task_type = "classification" if name in CLASSIFICATION_MODELS else "regression"
+    return model(name=name, type=task_type)

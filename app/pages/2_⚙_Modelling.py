@@ -3,7 +3,8 @@ import pandas as pd
 
 from app.core.system import AutoMLSystem
 from autoop.core.ml.dataset import Dataset
-from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS
+from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS, get_model
+from autoop.core.ml.metric import METRICS, get_metric
 
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
@@ -22,6 +23,8 @@ automl = AutoMLSystem.get_instance()
 datasets = automl.registry.list(type="dataset")
 
 st.subheader("Available Datasets")
+write_helper_text(
+    "Choose a dataset to use for modelling. The dataset will be used to train the model.")
 if datasets:
     dataset_names = [dataset.name for dataset in datasets]
     selected_dataset_name = st.selectbox("Select a dataset", dataset_names)
@@ -39,8 +42,9 @@ if datasets:
             st.dataframe(data.head())
 
             st.subheader("Feature Detection")
+            write_helper_text(
+                "Select the input features and the target feature. The target feature will be used to detect the task type (classification or regression).")
             feature_columns = data.columns.tolist()
-            st.write("Select input features and a target feature from the dataset:")
             input_features = st.multiselect(
                 "Select Input Features", feature_columns)
             target_feature = st.selectbox(
@@ -54,14 +58,17 @@ if datasets:
                     if pd.api.types.is_numeric_dtype(data[target_feature]) or pd.api.types.is_float_dtype(data[target_feature]) and (data[target_feature].max() - data[target_feature].min() > 1):
                         type = "numerical"
                         available_models = REGRESSION_MODELS
+                        available_metrics = METRICS[:3]
                     else:
                         type = "categorical"
                         available_models = CLASSIFICATION_MODELS
+                        available_metrics = METRICS[3:]
                     st.write(f"### Detected task type: {type}")
                     st.info(
                         f"Task type based on the target feature '{target_feature}': {type}")
 
                     st.subheader("Model Selection")
+                    write_helper_text("Select a model based on the task type.")
                     selected_model = st.selectbox(
                         "Select a model", available_models)
 
@@ -72,20 +79,25 @@ if datasets:
                         st.write("No models available.")
 
                     st.subheader("Select Dataset Split")
+                    write_helper_text(
+                        "Choose a split ratio for training and testing data.")
                     split_ratio = st.slider(
                         "Training/Test Data Split Ratio",
                         min_value=0.1,
-                        max_value=0.9,
-                        value=0.8,
+                        max_value=1.0,
+                        value=0.5,
                         step=0.1,
                     )
 
                     st.subheader("Select Metrics")
                     metrics = st.multiselect(
-                        "Available Metrics",)
+                        "Available Metrics", available_metrics)
+                    write_helper_text(
+                        "Choose the metric(s) to evaluate the model's performance.")
 
                     st.subheader("Pipeline Summary")
-                    st.write(f"### Pipeline Summary")
+                    write_helper_text(
+                        "Make sure pipeline configurations are correct.")
                     st.markdown(
                         f"""
                         - Dataset: {selected_dataset.name}
@@ -96,6 +108,8 @@ if datasets:
                         - Metrics: {', '.join(metrics)}
                         """
                     )
+                    model = get_model(name=selected_model)
+                    metrics = [get_metric(metric) for metric in metrics]
 
         except FileNotFoundError:
             st.error("Dataset file not found.")
