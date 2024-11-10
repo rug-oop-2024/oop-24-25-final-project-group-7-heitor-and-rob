@@ -2,8 +2,9 @@
 from autoop.core.ml.model.model import Model
 from autoop.core.ml.model.regression.linear_regression_model import LinearRegression
 from autoop.core.ml.model.regression.multiple_linear_regression_model import MultipleLinearRegression
-from autoop.core.ml.model.classification.svm_model import SVMClassifier
+from autoop.core.ml.model.classification.KNN_model import KNearestNeighbors
 from autoop.core.ml.model.classification.logistic_regression_model import LogisticRegression
+from autoop.core.ml.model.classification.random_forest_model import RandomForest
 
 REGRESSION_MODELS = [
     "linear_regression",
@@ -12,7 +13,8 @@ REGRESSION_MODELS = [
 
 CLASSIFICATION_MODELS = [
     "logistic_regression",
-    "svm",
+    "random_forest",
+    "KNN"
 ]  # add your models as str here
 
 
@@ -21,7 +23,8 @@ def get_model(task_type: str, model_name: str, **hyperparameters) -> Model:
     model_map = {
         "classification": {
             "logistic_regression": LogisticRegression,
-            "svm": SVMClassifier,
+            "random_forest": RandomForest,
+            "KNN": KNearestNeighbors
         },
         "regression": {
             "multiple_linear_regression": MultipleLinearRegression,
