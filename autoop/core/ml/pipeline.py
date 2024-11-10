@@ -30,9 +30,9 @@ class Pipeline:
         The ratio to split the dataset into training and testing sets.
     """
 
-    def __init__(self, 
+    def __init__(self,
                  metrics: List[Metric],
-                 dataset: Dataset, 
+                 dataset: Dataset,
                  model: Model,
                  input_features: List[Feature],
                  target_feature: Feature,
@@ -61,12 +61,13 @@ class Pipeline:
         self._metrics = metrics
         self._artifacts = {}
         self._split = split
-        if (target_feature.type == "categorical" and 
+        if (target_feature.type == "categorical" and
                 model.type != "classification"):
             raise ValueError(
-                "Model type must be classification for categorical target feature"
+                """Model type must be classification
+                  for categorical target feature"""
             )
-        if (target_feature.type == "continuous" and 
+        if (target_feature.type == "continuous" and
                 model.type != "regression"):
             raise ValueError(
                 "Model type must be regression for continuous target feature"
@@ -96,7 +97,8 @@ Pipeline(
     @property
     def artifacts(self) -> List[Artifact]:
         """
-        Returns the artifacts generated during the pipeline execution to be saved.
+        Returns the artifacts generated during the pipeline
+          execution to be saved.
         """
         artifacts = []
         for name, artifact in self._artifacts.items():
@@ -114,13 +116,13 @@ Pipeline(
             "target_feature": self._target_feature,
             "split": self._split,
         }
-        artifacts.append(Artifact(name="pipeline_config", 
+        artifacts.append(Artifact(name="pipeline_config",
                                   data=pickle.dumps(pipeline_data)))
         artifacts.append(
             self._model.to_artifact(name=f"pipeline_model_{self._model.type}")
         )
         return artifacts
-    
+
     def _register_artifact(self, name: str, artifact: Any) -> None:
         """
         Registers an artifact with the given name.
@@ -142,7 +144,8 @@ Pipeline(
             [self._target_feature], self._dataset
         )[0]
         self._register_artifact(target_feature_name, artifact)
-        input_results = preprocess_features(self._input_features, self._dataset)
+        input_results = preprocess_features(
+            self._input_features, self._dataset)
         for (feature_name, data, artifact) in input_results:
             self._register_artifact(feature_name, artifact)
         self._output_vector = target_data
@@ -155,12 +158,14 @@ Pipeline(
         Splits the data into training and testing sets.
         """
         split = self._split
-        self._train_X = [vector[:int(split * len(vector))] 
+        self._train_X = [vector[:int(split * len(vector))]
                          for vector in self._input_vectors]
-        self._test_X = [vector[int(split * len(vector)):] 
+        self._test_X = [vector[int(split * len(vector)):]
                         for vector in self._input_vectors]
-        self._train_y = self._output_vector[:int(split * len(self._output_vector))]
-        self._test_y = self._output_vector[int(split * len(self._output_vector)):]
+        self._train_y = self._output_vector[
+            :int(split * len(self._output_vector))]
+        self._test_y = self._output_vector[
+            int(split * len(self._output_vector)):]
 
     def _compact_vectors(self, vectors: List[np.array]) -> np.array:
         """

@@ -67,7 +67,8 @@ class RandomForest(Model):
         """
         if self._model is None:
             raise ValueError(
-                "Model has not been initialized. Call `initialize_model()` first."
+                "Model has not been initialized. Call `initialize_model()` "
+                "first."
             )
         self._model.fit(X, y)
         self.parameters = {
@@ -89,6 +90,8 @@ class RandomForest(Model):
         """
         if self._model is None:
             raise ValueError(
-                "Model has not been initialized. Call `initialize_model()` first."
+                "Model has not been initialized. Call `initialize_model()` "
+                "first."
             )
+
         return self._model.predict(X)

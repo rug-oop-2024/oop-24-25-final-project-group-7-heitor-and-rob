@@ -3,12 +3,14 @@ import os
 from typing import List
 from glob import glob
 
+
 class NotFoundError(Exception):
     """
     Exception raised when a path is not found.
     """
     def __init__(self, path: str) -> None:
         super().__init__(f"Path not found: {path}")
+
 
 class Storage(ABC):
     """
@@ -61,6 +63,7 @@ class Storage(ABC):
             list: List of paths.
         """
         pass
+
 
 class LocalStorage(Storage):
     """
@@ -130,7 +133,8 @@ class LocalStorage(Storage):
         path = self._join_path(prefix)
         self._assert_path_exists(path)
         keys = glob(os.path.join(path, "**", "*"), recursive=True)
-        return [os.path.relpath(p, self._base_path) for p in keys if os.path.isfile(p)]
+        return [os.path.relpath(
+            p, self._base_path) for p in keys if os.path.isfile(p)]
 
     def _assert_path_exists(self, path: str) -> None:
         """

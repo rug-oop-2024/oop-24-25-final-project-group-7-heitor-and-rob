@@ -5,7 +5,10 @@ from autoop.core.ml.model.model import Model
 class LogisticRegression(Model):
     """Logistic Regression classifier."""
 
-    def __init__(self, name="Logistic Regression", type="classification", learning_rate: float = 0.01, num_iterations: int = 1000) -> None:
+    def __init__(self, name: str = "Logistic Regression",
+                  type: str = "classification", 
+                 learning_rate: float = 0.01,
+                   num_iterations: int = 1000) -> None:
         """
         Initialize the Logistic Regression model.
 

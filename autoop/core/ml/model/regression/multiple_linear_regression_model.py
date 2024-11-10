@@ -14,9 +14,11 @@ class MultipleLinearRegression(Model):
         A dictionary to store the model parameters.
     """
 
-    def __init__(self, name: str = "Multiple Linear Regression", type: str = "regression"):
+    def __init__(self, name: str = "Multiple Linear Regression", 
+                 type: str = "regression") -> None:
         """
-        Initialize the MultipleLinearRegression model with given hyperparameters.
+        Initialize the MultipleLinearRegression
+          model with given hyperparameters.
 
         Parameters
         ----------
@@ -29,9 +31,10 @@ class MultipleLinearRegression(Model):
         self.weights = None
         self.bias = None
 
-    def initialize_model(self):
+    def initialize_model(self) -> None:
         """
-        Initialize a Scikit-learn LinearRegression model for multiple linear regression.
+        Initialize a Scikit-learn LinearRegression
+          model for multiple linear regression.
 
         Returns
         -------
@@ -41,9 +44,12 @@ class MultipleLinearRegression(Model):
         self.weights = None
         self.bias = 0
 
-    def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
+    def fit(
+            self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
         """
-        Train the model by solving for the weight vector w using the closed-form solution for multiple linear regression.
+        Train the model by solving for the
+          weight vector w using the closed-form
+        solution for multiple linear regression.
 
         Parameters
         ----------
@@ -94,7 +100,7 @@ class MultipleLinearRegression(Model):
         ValueError
             If the model has not been fitted yet.
         """
-        if 'weights' not in self.parameters or 'biases' not in self.parameters:
+        if 'weights'not in self.parameters or 'biases' not in self.parameters:
             raise ValueError("Model has not been fitted yet.")
         y_hat = observation.dot(self.parameters['weights'])
         return y_hat + self.parameters['biases']

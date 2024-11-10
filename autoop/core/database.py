@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Tuple, List, Union
+from typing import Tuple, List, Union
 import os
 
 from autoop.core.storage import Storage
@@ -50,7 +50,8 @@ class Database():
             id (str): The id of the data.
 
         Returns:
-            Union[dict, None]: The data that was stored, or None if it doesn't exist.
+            Union[dict, None]: The data that was stored,
+              or None if it doesn't exist.
         """
         if not self._data.get(collection, None):
             return None
@@ -78,7 +79,8 @@ class Database():
             collection (str): The collection to list the data from.
 
         Returns:
-            List[Tuple[str, dict]]: A list of tuples containing the id and data
+            List[Tuple[str, dict]]: A list of tuples
+              containing the id and data
             for each item in the collection.
         """
         if not self._data.get(collection, None):
@@ -120,4 +122,3 @@ class Database():
             if collection not in self._data:
                 self._data[collection] = {}
             self._data[collection][id] = json.loads(data.decode())
-

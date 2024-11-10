@@ -18,7 +18,8 @@ class KNearestNeighbors(Model):
         _parameters (dict): Model parameters.
     """
 
-    def __init__(self, k: int = 3, name: str = "K-Nearest Neighbors", type: str = "classification") -> None:
+    def __init__(self, k: int = 3, name: str = "K-Nearest Neighbors", 
+                 type: str = "classification") -> None:
         """
         Initialize the KNearestNeighbors model.
 
@@ -65,11 +66,14 @@ class KNearestNeighbors(Model):
             ground_truth (np.ndarray): Ground truth labels.
 
         Raises:
-            ValueError: If the number of observations does not match the number of ground truth labels.
+            ValueError: If the number of observations does not
+              match the number of ground truth labels.
         """
         if observations.shape[0] != ground_truth.shape[0]:
             raise ValueError(
-                "The number of observations must match the number of ground truth labels.")
+                "The number of observations must match the number of ground "
+                "truth labels."
+            )
 
         self.observations = observations
         self.ground_truth = ground_truth
@@ -91,7 +95,7 @@ class KNearestNeighbors(Model):
         predictions = [self._predict_single(x) for x in observations]
         return np.array(predictions)
 
-    def _predict_single(self, observation: np.ndarray) -> Any:
+    def _predict_single(self, observation: np.ndarray) -> np.ndarray:
         """
         Predict the label for a single observation.
 

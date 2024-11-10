@@ -9,7 +9,7 @@ def main() -> None:
         page_icon="👋",
     )
     st.sidebar.success("Select a page above.")
-    with open("README.md") as readme_file:
+    with open("../README.md") as readme_file:
         st.markdown(readme_file.read())
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ class Model(ABC):
             hyperparameters: Arbitrary keyword arguments for hyperparameters.
         """
         self._model = None
-        self.type = None
+        self.type = type
         self.parameters = None
 
     def initialize_model(self) -> None:
