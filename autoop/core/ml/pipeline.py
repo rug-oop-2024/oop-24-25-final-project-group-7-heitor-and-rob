@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict, Any
 import pickle
 
 from autoop.core.ml.artifact import Artifact
@@ -36,7 +36,7 @@ class Pipeline:
                  model: Model,
                  input_features: List[Feature],
                  target_feature: Feature,
-                 split=0.8):
+                 split: float = 0.8) -> None:
         """
         Parameters
         ----------
@@ -51,7 +51,8 @@ class Pipeline:
         target_feature : Feature
             The target feature.
         split : float, optional
-            The ratio to split the dataset into training and testing sets (default is 0.8).
+            The ratio to split the dataset into training and testing sets 
+            (default is 0.8).
         """
         self._dataset = dataset
         self._model = model
@@ -61,11 +62,15 @@ class Pipeline:
         self._artifacts = {}
         self._split = split
         if target_feature.type == "categorical" and model.type != "classification":
-            raise ValueError("Model type must be classification for categorical target feature")
+            raise ValueError(
+                "Model type must be classification for categorical target feature"
+            )
         if target_feature.type == "continuous" and model.type != "regression":
-            raise ValueError("Model type must be regression for continuous target feature")
+            raise ValueError(
+                "Model type must be regression for continuous target feature"
+            )
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Returns a string representation of the Pipeline object.
         """
@@ -80,7 +85,7 @@ Pipeline(
 """
 
     @property
-    def model(self):
+    def model(self) -> Model:
         """
         Returns the model used in the pipeline.
         """
@@ -108,10 +113,12 @@ Pipeline(
             "split": self._split,
         }
         artifacts.append(Artifact(name="pipeline_config", data=pickle.dumps(pipeline_data)))
-        artifacts.append(self._model.to_artifact(name=f"pipeline_model_{self._model.type}"))
+        artifacts.append(
+            self._model.to_artifact(name=f"pipeline_model_{self._model.type}")
+        )
         return artifacts
     
-    def _register_artifact(self, name: str, artifact):
+    def _register_artifact(self, name: str, artifact: Any) -> None:
         """
         Registers an artifact with the given name.
 
@@ -124,19 +131,23 @@ Pipeline(
         """
         self._artifacts[name] = artifact
 
-    def _preprocess_features(self):
+    def _preprocess_features(self) -> None:
         """
         Preprocesses the input and target features.
         """
-        (target_feature_name, target_data, artifact) = preprocess_features([self._target_feature], self._dataset)[0]
+        (target_feature_name, target_data, artifact) = preprocess_features(
+            [self._target_feature], self._dataset
+        )[0]
         self._register_artifact(target_feature_name, artifact)
         input_results = preprocess_features(self._input_features, self._dataset)
         for (feature_name, data, artifact) in input_results:
             self._register_artifact(feature_name, artifact)
         self._output_vector = target_data
-        self._input_vectors = [data for (feature_name, data, artifact) in input_results]
+        self._input_vectors = [
+            data for (feature_name, data, artifact) in input_results
+        ]
 
-    def _split_data(self):
+    def _split_data(self) -> None:
         """
         Splits the data into training and testing sets.
         """
@@ -162,7 +173,7 @@ Pipeline(
         """
         return np.concatenate(vectors, axis=1)
 
-    def _train(self):
+    def _train(self) -> None:
         """
         Trains the model using the training data.
         """
@@ -170,7 +181,7 @@ Pipeline(
         Y = self._train_y
         self._model.fit(X, Y)
 
-    def _evaluate(self):
+    def _evaluate(self) -> None:
         """
         Evaluates the model using the testing data.
         """
@@ -183,7 +194,7 @@ Pipeline(
             self._metrics_results.append((metric, result))
         self._predictions = predictions
 
-    def execute(self):
+    def execute(self) -> Dict[str, Any]:
         """
         Executes the pipeline.
 

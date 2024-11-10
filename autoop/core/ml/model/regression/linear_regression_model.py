@@ -24,9 +24,9 @@ class LinearRegression(Model):
         Args:
             learning_rate (float): The learning rate for gradient descent.
             num_iterations (int): The number of iterations for gradient descent.
-            use_gradient_descent (bool): Whether to use gradient descent or the 
+            use_gradient_descent (bool): Whether to use gradient descent or the
                                          closed-form solution.
-            **hyperparameters: Arbitrary keyword arguments for model 
+            **hyperparameters: Arbitrary keyword arguments for model
                                hyperparameters.
         """
         super().__init__(**hyperparameters)
@@ -45,7 +45,7 @@ class LinearRegression(Model):
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
-        Train the linear regression model using gradient descent or the normal 
+        Train the linear regression model using gradient descent or the normal
         equation.
 
         Args:

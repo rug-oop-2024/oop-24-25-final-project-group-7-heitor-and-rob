@@ -12,18 +12,18 @@ class RandomForest(Model):
     Attributes:
         n_trees (int): Number of trees in the forest.
         max_depth (int): Maximum depth of the tree.
-        min_samples_split (int): Minimum number of samples required to 
+        min_samples_split (int): Minimum number of samples required to
                                  split an internal node.
         name (str): Name of the model.
         type (str): Type of the model.
-        _hyperparameters (dict): Hyperparameters for the 
+        _hyperparameters (dict): Hyperparameters for the
                                  RandomForestClassifier.
-        _model (RandomForestClassifier): The RandomForestClassifier 
+        _model (RandomForestClassifier): The RandomForestClassifier
                                          instance.
     """
 
-    def __init__(self, n_trees: int = 100, max_depth: int = None, 
-                 min_samples_split: int = 2, name: str = "Random Forest", 
+    def __init__(self, n_trees: int = 100, max_depth: int = None,
+                 min_samples_split: int = 2, name: str = "Random Forest",
                  type: str = "classification") -> None:
         """
         Initializes the RandomForest model with given hyperparameters.
@@ -31,7 +31,7 @@ class RandomForest(Model):
         Args:
             n_trees (int): Number of trees in the forest.
             max_depth (int): Maximum depth of the tree.
-            min_samples_split (int): Minimum number of samples required to 
+            min_samples_split (int): Minimum number of samples required to
                                      split an internal node.
             name (str): Name of the model.
             type (str): Type of the model.
@@ -49,7 +49,7 @@ class RandomForest(Model):
 
     def initialize_model(self) -> None:
         """
-        Initializes the RandomForestClassifier with the specified 
+        Initializes the RandomForestClassifier with the specified
         hyperparameters.
         """
         self._model = RandomForestClassifier(**self._hyperparameters)

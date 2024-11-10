@@ -4,7 +4,10 @@ from typing import List
 from glob import glob
 
 class NotFoundError(Exception):
-    def __init__(self, path):
+    """
+    Exception raised when a path is not found.
+    """
+    def __init__(self, path: str) -> None:
         super().__init__(f"Path not found: {path}")
 
 class Storage(ABC):
@@ -13,7 +16,7 @@ class Storage(ABC):
     """
 
     @abstractmethod
-    def save(self, data: bytes, path: str):
+    def save(self, data: bytes, path: str) -> None:
         """
         Save data to a given path.
 
@@ -37,7 +40,7 @@ class Storage(ABC):
         pass
 
     @abstractmethod
-    def delete(self, path: str):
+    def delete(self, path: str) -> None:
         """
         Delete data at a given path.
 
@@ -47,7 +50,7 @@ class Storage(ABC):
         pass
 
     @abstractmethod
-    def list(self, path: str) -> list:
+    def list(self, path: str) -> List[str]:
         """
         List all paths under a given path.
 
@@ -64,7 +67,7 @@ class LocalStorage(Storage):
     Local storage implementation of the Storage abstract base class.
     """
 
-    def __init__(self, base_path: str = "./assets"):
+    def __init__(self, base_path: str = "./assets") -> None:
         """
         Initialize LocalStorage with a base path.
 
@@ -75,7 +78,7 @@ class LocalStorage(Storage):
         if not os.path.exists(self._base_path):
             os.makedirs(self._base_path)
 
-    def save(self, data: bytes, key: str):
+    def save(self, data: bytes, key: str) -> None:
         """
         Save data to a given key.
 
@@ -103,7 +106,7 @@ class LocalStorage(Storage):
         with open(path, 'rb') as f:
             return f.read()
 
-    def delete(self, key: str = "/"):
+    def delete(self, key: str = "/") -> None:
         """
         Delete data at a given key.
 
@@ -129,7 +132,7 @@ class LocalStorage(Storage):
         keys = glob(os.path.join(path, "**", "*"), recursive=True)
         return [os.path.relpath(p, self._base_path) for p in keys if os.path.isfile(p)]
 
-    def _assert_path_exists(self, path: str):
+    def _assert_path_exists(self, path: str) -> None:
         """
         Assert that a given path exists.
 
