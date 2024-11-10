@@ -17,5 +17,28 @@ automl = AutoMLSystem.get_instance()
 
 datasets = automl.registry.list(type="dataset")
 
-# your code here
+st.subheader("Available Datasets")
+if datasets:
+    dataset_names = [dataset.name for dataset in datasets]
+    selected_dataset_name = st.selectbox("Select a dataset", dataset_names)
+    selected_dataset = next(dataset for dataset in datasets if dataset.name == selected_dataset_name)
+    st.write(f"Selected Dataset: {selected_dataset.name}, Type: {selected_dataset.type}")
+    
+    if selected_dataset:
+        models = automl.registry.list(type="model")
+        st.subheader("Available Models")
+        if models:
+            model_names = [model.name for model in models]
+            selected_model_name = st.selectbox("Select a model", model_names)
+            selected_model = next(model for model in models if model.name == selected_model_name)
+            st.write(f"Selected Model: {selected_model.name}, Type: {selected_model.type}")
+        else:
+            st.write("No models available.")
+
+        
+else:
+    st.write("No datasets available.")
+
+
+
 
