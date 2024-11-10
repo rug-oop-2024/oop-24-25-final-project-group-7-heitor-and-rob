@@ -137,6 +137,7 @@ if datasets:
                         - Metrics: {', '.join(metrics)}
                         """
                     )
+                    # this is where it stops working and i dont know why
                     model = get_model(selected_model)
                     metrics = [get_metric(metric) for metric in metrics]
                     pipeline = Pipeline(
