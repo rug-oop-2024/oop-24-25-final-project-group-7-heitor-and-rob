@@ -63,7 +63,7 @@ class Artifact:
         self.type = type
         self.tags = [] if tags is None else tags
         self.metadata = {} if metadata is None else metadata
-        self.id = f"{self.name}_{self.version}"
+        self.id = f"{self.name}:{self.version}"
 
     def read(self) -> pd.DataFrame:
         """
