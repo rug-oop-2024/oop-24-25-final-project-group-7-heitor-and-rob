@@ -1,43 +1,40 @@
 from typing import Any, Dict, List, Optional
 import base64
-import pickle
+import pandas as pd
+import io
 
 
 class Artifact():
-    def __init__(self, name: str, asset_path: str, version: str, data: bytes, type: str, tags: Optional[List[str]] = None):
+    def __init__(self,
+                 name: str,
+                 type: str,
+                 asset_path: str = "",
+                 version: str = "1.0.0",
+                 data: Optional[bytes] = None,
+                 tags: Optional[List[str]] = None,
+                 metadata: Optional[Dict[str, Any]] = None):
         self.name = name
         self.asset_path = asset_path
         self.version = version
         self.data = data
         self.type = type
-        if tags is not None:
-            self.tags = tags
+        self.tags = [] if tags is None else tags
+        self.metadata = {} if metadata is None else metadata
+        self.id = f"{self.name}_{self.version}"
 
-    @property
-    def id(self) -> str:
-        encoded_path = base64.urlsafe_b64encode(
-            self._asset_path.encode()).decode()
-        return f"{encoded_path}:{self._version}"
+    def read(self) -> pd.DataFrame:
+        if isinstance(self.data, str):
+            self.data = self.data.encode()
 
-    @property
-    def metadata(self) -> Dict[str, Any]:
-        return {
-            "id": self.id,
-            "asset_path": self.asset_path,
-            "version": self.version,
-            "type": self.type,
-            "tags": self.tags,
-            "metadata": {
-                "experiment_id": None,
-                "run_id": None,
-            }
-        }
-
-    def read(self) -> Any:
-        if self.data is None:
-            raise ValueError("No data found in the artifact.")
-        return self.data
+        if isinstance(self.data, bytes):
+            try:
+                decoded = base64.b64decode(self.data)
+                return pd.read_csv(io.BytesIO(decoded))
+            except Exception:
+                return pd.read_csv(io.BytesIO(self.data))
+        else:
+            raise ValueError("Data is not a string or bytes.")
 
     def save(self, data: Any):
-        with open(self.asset_path, 'wb') as f:
-            pickle.dump(self, f)
+        self.data = base64.b64encode(data).decode("utf-8")
+        return self.data

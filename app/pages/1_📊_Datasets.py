@@ -96,7 +96,7 @@ if uploaded_file:
             data=data,
             name=dataset_name,
             asset_path=asset_path,
-            version="1.0.0"
+            version="1.0.0",
         )
 
         if st.button("Save Dataset"):
