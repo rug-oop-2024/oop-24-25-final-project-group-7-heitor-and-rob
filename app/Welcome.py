@@ -15,7 +15,7 @@ def main() -> None:
     current_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(current_dir)
     readme_path = os.path.join(project_root, "README.md")
-    with open(readme_path) as readme_file:
+    with open(readme_path, encoding="utf-8") as readme_file:
         st.markdown(readme_file.read())
 
 

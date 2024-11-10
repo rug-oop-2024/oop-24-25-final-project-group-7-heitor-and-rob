@@ -72,7 +72,7 @@
   <h1>Source code for app.core.system</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">autoop.core.storage</span> <span class="kn">import</span> <span class="n">LocalStorage</span>
 <span class="kn">from</span> <span class="nn">autoop.core.database</span> <span class="kn">import</span> <span class="n">Database</span>
-<span class="kn">from</span> <span class="nn">autoop.core.ml.dataset</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="c1"># from autoop.core.ml.dataset import Dataset  # Unused import</span>
 <span class="kn">from</span> <span class="nn">autoop.core.ml.artifact</span> <span class="kn">import</span> <span class="n">Artifact</span>
 <span class="kn">from</span> <span class="nn">autoop.core.storage</span> <span class="kn">import</span> <span class="n">Storage</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -82,12 +82,13 @@
 <a class="viewcode-back" href="../../../modules.html#app.core.system.ArtifactRegistry">[docs]</a>
 <span class="k">class</span> <span class="nc">ArtifactRegistry</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A registry for managing artifacts, including saving, listing, retrieving, and deleting artifacts.</span>
+<span class="sd">    A registry for managing artifacts, including saving, listing,</span>
+<span class="sd">      retrieving, and deleting artifacts.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ArtifactRegistry.__init__">
 <a class="viewcode-back" href="../../../modules.html#app.core.system.ArtifactRegistry.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">Storage</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">Storage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the ArtifactRegistry with a database and storage.</span>
 
@@ -100,9 +101,10 @@
 
 <div class="viewcode-block" id="ArtifactRegistry.register">
 <a class="viewcode-back" href="../../../modules.html#app.core.system.ArtifactRegistry.register">[docs]</a>
-    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact</span><span class="p">:</span> <span class="n">Artifact</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact</span><span class="p">:</span> <span class="n">Artifact</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register an artifact by saving its data in storage and its metadata in the database.</span>
+<span class="sd">        Register an artifact by saving its data in</span>
+<span class="sd">          storage and its metadata in the db.</span>
 
 <span class="sd">        :param artifact: The artifact to register.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -117,7 +119,7 @@
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_database</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;artifacts&quot;</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span></div>
 
-    
+
 <div class="viewcode-block" id="ArtifactRegistry.list">
 <a class="viewcode-back" href="../../../modules.html#app.core.system.ArtifactRegistry.list">[docs]</a>
     <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]:</span>
@@ -144,7 +146,7 @@
             <span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">artifacts</span></div>
 
-    
+
 <div class="viewcode-block" id="ArtifactRegistry.get">
 <a class="viewcode-back" href="../../../modules.html#app.core.system.ArtifactRegistry.get">[docs]</a>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Artifact</span><span class="p">:</span>
@@ -165,10 +167,10 @@
             <span class="nb">type</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
         <span class="p">)</span></div>
 
-    
+
 <div class="viewcode-block" id="ArtifactRegistry.delete">
 <a class="viewcode-back" href="../../../modules.html#app.core.system.ArtifactRegistry.delete">[docs]</a>
-    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete an artifact by its ID.</span>
 
@@ -179,19 +181,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_database</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;artifacts&quot;</span><span class="p">,</span> <span class="n">artifact_id</span><span class="p">)</span></div>
 </div>
 
-    
+
 
 <div class="viewcode-block" id="AutoMLSystem">
 <a class="viewcode-back" href="../../../modules.html#app.core.system.AutoMLSystem">[docs]</a>
 <span class="k">class</span> <span class="nc">AutoMLSystem</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Singleton class for managing the AutoML system, including storage and database.</span>
+<span class="sd">    Singleton class for managing the AutoML system,</span>
+<span class="sd">      including storage and database.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="AutoMLSystem.__init__">
 <a class="viewcode-back" href="../../../modules.html#app.core.system.AutoMLSystem.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">LocalStorage</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">LocalStorage</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the AutoMLSystem with storage and database.</span>
 
@@ -206,7 +209,7 @@
 <div class="viewcode-block" id="AutoMLSystem.get_instance">
 <a class="viewcode-back" href="../../../modules.html#app.core.system.AutoMLSystem.get_instance">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_instance</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">get_instance</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;AutoMLSystem&#39;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the singleton instance of the AutoMLSystem.</span>
 
@@ -214,17 +217,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">AutoMLSystem</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">AutoMLSystem</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="n">AutoMLSystem</span><span class="p">(</span>
-                <span class="n">LocalStorage</span><span class="p">(</span><span class="s2">&quot;./assets/objects&quot;</span><span class="p">),</span> 
-                <span class="n">Database</span><span class="p">(</span>
-                    <span class="n">LocalStorage</span><span class="p">(</span><span class="s2">&quot;./assets/dbo&quot;</span><span class="p">)</span>
-                <span class="p">)</span>
+                <span class="n">LocalStorage</span><span class="p">(</span><span class="s2">&quot;./assets/objects&quot;</span><span class="p">),</span>
+                <span class="n">Database</span><span class="p">(</span><span class="n">LocalStorage</span><span class="p">(</span><span class="s2">&quot;./assets/dbo&quot;</span><span class="p">))</span>
             <span class="p">)</span>
         <span class="n">AutoMLSystem</span><span class="o">.</span><span class="n">_instance</span><span class="o">.</span><span class="n">_database</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">AutoMLSystem</span><span class="o">.</span><span class="n">_instance</span></div>
 
-    
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">registry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">registry</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArtifactRegistry</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the artifact registry.</span>
 

@@ -22,6 +22,54 @@ AutoOP Core
    :undoc-members:
    :show-inheritance:
 
+AutoOP ML
+--------
+
+.. automodule:: autoop.ml.model.classification
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: autoop.ml.model.regression
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: autoop.ml.model.artifact
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: autoop.ml.model.dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: autoop.ml.model.feature
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: autoop.ml.model.metric
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: autoop.ml.model.pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: autoop.ml.model.database
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: autoop.ml.model.storage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 AutoOP Functional
 ---------------
 

@@ -91,10 +91,9 @@
 <span class="sd">        List[Feature]: List of features with their types.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If dataset is not an instance of Dataset or if dataset has no data to read.</span>
+<span class="sd">        ValueError: If dataset is not an instance</span>
+<span class="sd">          of Dataset or if dataset has no data to read.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dataset must be an instance of Dataset&quot;</span><span class="p">)</span>
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
