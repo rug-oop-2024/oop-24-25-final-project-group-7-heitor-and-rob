@@ -7,25 +7,23 @@ from copy import deepcopy
 class KNearestNeighbors(Model):
     """
     K-Nearest Neighbors classifier.
-
-    Attributes:
-        k (int): Number of neighbors to use.
-        name (str): Name of the model.
-        type (str): Type of the model.
-        observations (np.ndarray): Training observations.
-        ground_truth (np.ndarray): Ground truth labels.
-        _parameters (dict): Model parameters.
     """
 
     def __init__(self, k: int = 3, name: str = "K-Nearest Neighbors",
                  type: str = "classification") -> None:
         """
-        Initialize the KNearestNeighbors model.
+        Initialize the K-Nearest Neighbors model with given hyperparameters.
 
-        Args:
-            k (int): Number of neighbors to use.
-            name (str): Name of the model.
-            type (str): Type of the model.
+        Parameters
+        ----------
+        k : int, optional
+            The number of nearest neighbors to consider for classification.
+            Defaults to 3.
+        name : str, optional
+            The name of the model. Defaults to "K-Nearest Neighbors".
+        type : str, optional
+            The type of the model. Defaults to "classification".
+
         """
         super().__init__(name=name, type=type)
         self.k = k
@@ -38,8 +36,10 @@ class KNearestNeighbors(Model):
         """
         Get the model parameters.
 
-        Returns:
-            dict: A dictionary of model parameters.
+        Returns
+        -------
+        dict
+            A dictionary with the model parameters.
         """
         return deepcopy(self._parameters)
 
@@ -48,31 +48,36 @@ class KNearestNeighbors(Model):
         """
         Set the model parameters.
 
-        Args:
-            value (dict): A dictionary of model parameters.
-
-        Raises:
-            ValueError: If the provided value is not a dictionary.
+        Parameters
+        ----------
+        value : dict
+            A dictionary containing the parameters to set for the model.
         """
         self._parameters = value
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
         """
-        Fit the model using the provided observations and ground truth labels.
+        Fit the K-Nearest Neighbors model to the given data.
 
-        Args:
-            observations (np.ndarray): Training observations.
-            ground_truth (np.ndarray): Ground truth labels.
+        Parameters
+        ----------
+        observations : np.ndarray
+            A 2D array of input data.
+        ground_truth : np.ndarray
+            A 1D array of target values.
 
-        Raises:
-            ValueError: If the number of observations does not
-              match the number of ground truth labels.
+        Raises
+        ------
+        ValueError
+            If the number of observations does not match the number of ground truth labels.
         """
         if observations.shape[0] != ground_truth.shape[0]:
             raise ValueError(
-                "The number of observations must match the number of ground "
-                "truth labels."
+                "The number of observations must match the number of ground truth labels."
             )
+
+        if len(ground_truth.shape) > 1:
+            ground_truth = ground_truth.flatten()
 
         self.observations = observations
         self.ground_truth = ground_truth
@@ -83,26 +88,40 @@ class KNearestNeighbors(Model):
 
     def predict(self, observations: np.ndarray) -> np.ndarray:
         """
-        Predict the labels for the provided observations.
+        Predicts the labels of the given observations using the K-Nearest Neighbors
+        algorithm.
 
-        Args:
-            observations (np.ndarray): Observations to predict.
+        Parameters
+        ----------
+        observations : np.ndarray
+            The observations to predict the labels of.
 
-        Returns:
-            np.ndarray: Predicted labels.
+        Returns
+        -------
+        np.ndarray
+            A 1D array of the predicted labels. The length of the array is equal to
+            the number of observations.
         """
+        if len(observations.shape) == 1:
+            observations = observations.reshape(1, -1)
+
         predictions = [self._predict_single(x) for x in observations]
         return np.array(predictions)
 
     def _predict_single(self, observation: np.ndarray) -> np.ndarray:
         """
-        Predict the label for a single observation.
+        Predicts the label of a single observation using the K-Nearest Neighbors
+        algorithm.
 
-        Args:
-            observation (np.ndarray): A single observation to predict.
+        Parameters
+        ----------
+        observation : np.ndarray
+            The observation to predict the label of.
 
-        Returns:
-            Any: Predicted label.
+        Returns
+        -------
+        np.ndarray
+            The predicted label of the observation.
         """
         distances = np.linalg.norm(self.observations - observation, axis=1)
         k_indices = np.argsort(distances)[:self.k]
