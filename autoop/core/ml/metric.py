@@ -12,7 +12,7 @@ METRICS = [
 ]
 
 
-def get_metric(name: str):
+def get_metric(name: str) -> Metric:
     """
     Factory function to get a metric by name.
 
@@ -62,6 +62,9 @@ class Metric(ABC):
 
 
 class Accuracy(Metric):
+    """
+    Class to evaluate the accuracy metric.
+    """
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
         Evaluate the accuracy metric.
@@ -77,6 +80,9 @@ class Accuracy(Metric):
 
 
 class MeanSquaredError(Metric):
+    """
+    Class to evaluate the mean squared error metric.
+    """
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
         Evaluate the mean squared error metric.
@@ -92,6 +98,9 @@ class MeanSquaredError(Metric):
 
 
 class RootMeanSquaredError(MeanSquaredError):
+    """
+    Class to evaluate the root mean squared error metric.
+    """
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
         Evaluate the root mean squared error metric.
@@ -107,6 +116,9 @@ class RootMeanSquaredError(MeanSquaredError):
 
 
 class Rsquared(Metric):
+    """
+    Class to evaluate the R-squared metric.
+    """
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
         Evaluate the R-squared metric.
@@ -125,6 +137,9 @@ class Rsquared(Metric):
 
 
 class Precision(Metric):
+    """
+    Class to evaluate the precision metric.
+    """
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
         Evaluate the precision metric.
@@ -140,16 +155,20 @@ class Precision(Metric):
         precisions = []
         for category in classes:
             true_positives = np.sum(
-                (prediction == category) & (ground_truth == category))
+                (prediction == category) & (ground_truth == category)
+            )
             predicted_positives = np.sum(prediction == category)
             if predicted_positives == 0:
                 precisions.append(0)
             else:
                 precisions.append(true_positives / predicted_positives)
-        return precisions/len(classes)
+        return precisions / len(classes)
 
 
 class Recall(Metric):
+    """
+    Class to evaluate the recall metric.
+    """
     def evaluate(self, prediction: np.ndarray, ground_truth: np.ndarray) -> float:
         """
         Evaluate the recall metric.
@@ -165,12 +184,15 @@ class Recall(Metric):
         recall_list = []
         for category in classes:
             true_positives = np.sum(
-                (prediction == category) & (ground_truth == category))
+                (prediction == category) & (ground_truth == category)
+            )
             false_negatives = np.sum(
-                (ground_truth == category) & (prediction != category))
+                (ground_truth == category) & (prediction != category)
+            )
             if true_positives + false_negatives == 0:
                 recall_list.append(0)
             else:
                 recall_list.append(
-                    true_positives/(true_positives+false_negatives))
-        return recall_list/len(classes)
+                    true_positives / (true_positives + false_negatives)
+                )
+        return recall_list / len(classes)

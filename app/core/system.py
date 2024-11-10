@@ -1,6 +1,6 @@
 from autoop.core.storage import LocalStorage
 from autoop.core.database import Database
-from autoop.core.ml.dataset import Dataset
+# from autoop.core.ml.dataset import Dataset  # Unused import
 from autoop.core.ml.artifact import Artifact
 from autoop.core.storage import Storage
 from typing import List
@@ -8,10 +8,11 @@ from typing import List
 
 class ArtifactRegistry:
     """
-    A registry for managing artifacts, including saving, listing, retrieving, and deleting artifacts.
+    A registry for managing artifacts, including saving, listing,
+      retrieving, and deleting artifacts.
     """
 
-    def __init__(self, database: Database, storage: Storage):
+    def __init__(self, database: Database, storage: Storage) -> None:
         """
         Initialize the ArtifactRegistry with a database and storage.
 
@@ -21,9 +22,9 @@ class ArtifactRegistry:
         self._database = database
         self._storage = storage
 
-    def register(self, artifact: Artifact):
+    def register(self, artifact: Artifact) -> None:
         """
-        Register an artifact by saving its data in storage and its metadata in the database.
+        Register an artifact by saving its data in storage and its metadata in the db.
 
         :param artifact: The artifact to register.
         """
@@ -80,7 +81,7 @@ class ArtifactRegistry:
             type=data["type"],
         )
     
-    def delete(self, artifact_id: str):
+    def delete(self, artifact_id: str) -> None:
         """
         Delete an artifact by its ID.
 
@@ -97,7 +98,7 @@ class AutoMLSystem:
     """
     _instance = None
 
-    def __init__(self, storage: LocalStorage, database: Database):
+    def __init__(self, storage: LocalStorage, database: Database) -> None:
         """
         Initialize the AutoMLSystem with storage and database.
 
@@ -109,7 +110,7 @@ class AutoMLSystem:
         self._registry = ArtifactRegistry(database, storage)
 
     @staticmethod
-    def get_instance():
+    def get_instance() -> 'AutoMLSystem':
         """
         Get the singleton instance of the AutoMLSystem.
 
@@ -126,7 +127,7 @@ class AutoMLSystem:
         return AutoMLSystem._instance
     
     @property
-    def registry(self):
+    def registry(self) -> ArtifactRegistry:
         """
         Get the artifact registry.
 

@@ -1,9 +1,4 @@
-from typing import Literal, List, Any
-from copy import deepcopy
-import numpy as np
-
-from autoop.core.ml.dataset import Dataset
-
+from typing import Literal
 
 class Feature:
     """
@@ -90,7 +85,9 @@ class Feature:
         """
         if type not in {"numerical", "categorical"}:
             raise ValueError(
-                f"Type must be either 'numerical' or 'categorical'. Recieved {type}")
+                f"Type must be either 'numerical' or 'categorical'. "
+                f"Received {type}"
+            )
         self._type = type
 
     def __str__(self) -> str:

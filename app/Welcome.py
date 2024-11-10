@@ -1,7 +1,6 @@
-from autoop.core.ml.artifact import Artifact
 import streamlit as st
 
-def main():
+def main() -> None:
     """
     Main function to set up the Streamlit page configuration and display content.
     """

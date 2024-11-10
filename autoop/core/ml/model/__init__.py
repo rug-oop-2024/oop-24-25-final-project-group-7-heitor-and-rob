@@ -1,10 +1,23 @@
+"""
+This module provides a factory function to get machine learning models
+by task type and model name.
+"""
+
 from autoop.core.ml.model.model import Model
-from autoop.core.ml.model.regression.linear_regression_model import LinearRegression
-from autoop.core.ml.model.regression.multiple_linear_regression_model import MultipleLinearRegression
+from autoop.core.ml.model.regression.linear_regression_model import (
+    LinearRegression,
+)
+from autoop.core.ml.model.regression.multiple_linear_regression_model import (
+    MultipleLinearRegression,
+)
 from autoop.core.ml.model.regression.lasso_model import Lasso
 from autoop.core.ml.model.classification.KNN_model import KNearestNeighbors
-from autoop.core.ml.model.classification.logistic_regression_model import LogisticRegression
-from autoop.core.ml.model.classification.random_forest_model import RandomForest
+from autoop.core.ml.model.classification.logistic_regression_model import (
+    LogisticRegression,
+)
+from autoop.core.ml.model.classification.random_forest_model import (
+    RandomForest,
+)
 from typing import Type
 
 
@@ -47,7 +60,9 @@ def get_model(name: str) -> Type[Model]:
 
     if name not in model_map:
         raise ValueError(
-            f"Unsupported task type: {name}. Supported task types are: {list(model_map.keys())}")
+            f"Unsupported task type: {name}. Supported task types are: "
+            f"{list(model_map.keys())}"
+        )
 
     model = model_map[name]
     task_type = "classification" if name in CLASSIFICATION_MODELS else "regression"

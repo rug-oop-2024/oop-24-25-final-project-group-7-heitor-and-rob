@@ -9,7 +9,7 @@ class Database():
     A simple database class that uses a storage backend to persist data.
     """
 
-    def __init__(self, storage: Storage):
+    def __init__(self, storage: Storage) -> None:
         """
         Initialize the database with a storage backend.
 
@@ -56,7 +56,7 @@ class Database():
             return None
         return self._data[collection].get(id, None)
     
-    def delete(self, collection: str, id: str):
+    def delete(self, collection: str, id: str) -> None:
         """
         Delete a key from the database.
 
@@ -78,19 +78,20 @@ class Database():
             collection (str): The collection to list the data from.
 
         Returns:
-            List[Tuple[str, dict]]: A list of tuples containing the id and data for each item in the collection.
+            List[Tuple[str, dict]]: A list of tuples containing the id and data
+            for each item in the collection.
         """
         if not self._data.get(collection, None):
             return []
         return [(id, data) for id, data in self._data[collection].items()]
 
-    def refresh(self):
+    def refresh(self) -> None:
         """
         Refresh the database by loading the data from storage.
         """
         self._load()
 
-    def _persist(self):
+    def _persist(self) -> None:
         """
         Persist the data to storage.
         """
@@ -98,7 +99,9 @@ class Database():
             if not data:
                 continue
             for id, item in data.items():
-                self._storage.save(json.dumps(item).encode(), f"{collection}{os.sep}{id}")
+                self._storage.save(
+                    json.dumps(item).encode(), f"{collection}{os.sep}{id}"
+                )
 
         keys = self._storage.list("")
         for key in keys:
@@ -106,7 +109,7 @@ class Database():
             if not self._data.get(collection, id):
                 self._storage.delete(f"{collection}{os.sep}{id}")
     
-    def _load(self):
+    def _load(self) -> None:
         """
         Load the data from storage.
         """

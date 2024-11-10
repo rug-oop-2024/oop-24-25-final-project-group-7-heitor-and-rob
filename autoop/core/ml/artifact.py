@@ -35,7 +35,7 @@ class Artifact:
                  version: str = "1.0.0",
                  data: Optional[bytes] = None,
                  tags: Optional[List[str]] = None,
-                 metadata: Optional[Dict[str, Any]] = None):
+                 metadata: Optional[Dict[str, Any]] = None) -> None:
         """
         Constructs all the necessary attributes for the artifact object.
 
@@ -91,13 +91,13 @@ class Artifact:
         else:
             raise ValueError("Data is not a string or bytes.")
 
-    def save(self, data: Any):
+    def save(self, data: bytes) -> str:
         """
         Saves the given data to the artifact.
 
         Parameters
         ----------
-        data : Any
+        data : bytes
             The data to be saved.
 
         Returns

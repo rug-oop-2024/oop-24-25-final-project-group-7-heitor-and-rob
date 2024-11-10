@@ -1,6 +1,6 @@
 from autoop.core.ml.model.model import Model
 import numpy as np
-from typing import Any
+# from typing import Any  # Unused import removed
 from copy import deepcopy
 from sklearn.ensemble import RandomForestClassifier
 
@@ -12,21 +12,27 @@ class RandomForest(Model):
     Attributes:
         n_trees (int): Number of trees in the forest.
         max_depth (int): Maximum depth of the tree.
-        min_samples_split (int): Minimum number of samples required to split an internal node.
+        min_samples_split (int): Minimum number of samples required to 
+                                 split an internal node.
         name (str): Name of the model.
         type (str): Type of the model.
-        _hyperparameters (dict): Hyperparameters for the RandomForestClassifier.
-        _model (RandomForestClassifier): The RandomForestClassifier instance.
+        _hyperparameters (dict): Hyperparameters for the 
+                                 RandomForestClassifier.
+        _model (RandomForestClassifier): The RandomForestClassifier 
+                                         instance.
     """
 
-    def __init__(self, n_trees: int = 100, max_depth: int = None, min_samples_split: int = 2, name: str = "Random Forest", type: str = "classification") -> None:
+    def __init__(self, n_trees: int = 100, max_depth: int = None, 
+                 min_samples_split: int = 2, name: str = "Random Forest", 
+                 type: str = "classification") -> None:
         """
         Initializes the RandomForest model with given hyperparameters.
 
         Args:
             n_trees (int): Number of trees in the forest.
             max_depth (int): Maximum depth of the tree.
-            min_samples_split (int): Minimum number of samples required to split an internal node.
+            min_samples_split (int): Minimum number of samples required to 
+                                     split an internal node.
             name (str): Name of the model.
             type (str): Type of the model.
         """
@@ -43,7 +49,8 @@ class RandomForest(Model):
 
     def initialize_model(self) -> None:
         """
-        Initializes the RandomForestClassifier with the specified hyperparameters.
+        Initializes the RandomForestClassifier with the specified 
+        hyperparameters.
         """
         self._model = RandomForestClassifier(**self._hyperparameters)
 
@@ -60,7 +67,8 @@ class RandomForest(Model):
         """
         if self._model is None:
             raise ValueError(
-                "Model has not been initialized. Call `initialize_model()` first.")
+                "Model has not been initialized. Call `initialize_model()` first."
+            )
         self._model.fit(X, y)
         self.parameters = {
             "strict_parameters": deepcopy(self._model.get_params()),
@@ -82,5 +90,6 @@ class RandomForest(Model):
         """
         if self._model is None:
             raise ValueError(
-                "Model has not been initialized. Call `initialize_model()` first.")
+                "Model has not been initialized. Call `initialize_model()` first."
+            )
         return self._model.predict(X)

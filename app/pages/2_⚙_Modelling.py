@@ -11,7 +11,7 @@ from autoop.core.ml.pipeline import Pipeline
 st.set_page_config(page_title="Modelling", page_icon="📈")
 
 
-def write_helper_text(text: str):
+def write_helper_text(text: str) -> None:
     """
     Write helper text in a styled format.
 
@@ -23,7 +23,8 @@ def write_helper_text(text: str):
 
 st.write("# ⚙ Modelling")
 write_helper_text(
-    "In this section, you can design a machine learning pipeline to train a model on a dataset."
+    "In this section, you can design a machine learning pipeline to train a model "
+    "on a dataset."
 )
 
 automl = AutoMLSystem.get_instance()
@@ -31,7 +32,8 @@ datasets = automl.registry.list(type="dataset")
 
 st.subheader("Available Datasets")
 write_helper_text(
-    "Choose a dataset to use for modelling. The dataset will be used to train the model."
+    "Choose a dataset to use for modelling. The dataset will be used to train the "
+    "model."
 )
 if datasets:
     dataset_names = [dataset.name for dataset in datasets]
@@ -53,8 +55,8 @@ if datasets:
 
             st.subheader("Feature Detection")
             write_helper_text(
-                """Select the input features and the target feature.
-                  The target feature will be used to detect the task type (classification or regression)."""
+                "Select the input features and the target feature. The target feature "
+                "will be used to detect the task type (classification or regression)."
             )
             feature_columns = data.columns.tolist()
             input_features = st.multiselect(
@@ -70,14 +72,9 @@ if datasets:
                         "Target feature cannot be selected as input feature."
                     )
                 else:
-                    if pd.api.types.is_numeric_dtype(data[target_feature]
-                                                     ) or pd.api.types.is_float_dtype(
-                                                         data[target_feature]) and (
-                                                             data[target_feature].max(
-
-                                                             ) - data[target_feature].min(
-
-                                                             ) > 1):
+                    if (pd.api.types.is_numeric_dtype(data[target_feature]) or
+                        pd.api.types.is_float_dtype(data[target_feature]) and
+                        (data[target_feature].max() - data[target_feature].min() > 1)):
                         type = "numerical"
                         available_models = REGRESSION_MODELS
                         available_metrics = METRICS[:3]
@@ -168,7 +165,8 @@ if datasets:
                     write_helper_text(
                         "Save the pipeline to the registry for future use.")
                     st.write(
-                        "The saved pipeline will be trained regardless of whether you pressed the train model button above.")
+                        "The saved pipeline will be trained regardless of whether you "
+                        "pressed the train model button above.")
 
                     pipeline_name = st.text_input("Pipeline Name")
                     if st.button("Save Pipeline"):
