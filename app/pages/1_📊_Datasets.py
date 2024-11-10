@@ -34,7 +34,7 @@ if st.button("Add Dataset"):
             st.error(f"Dataset {new_dataset_name} already exists!")
         else:
             new_dataset = Dataset(name=new_dataset_name, type=new_dataset_type)
-            automl.registry.add(new_dataset)
+            automl.registry.register(new_dataset)
             st.success(f"Dataset {new_dataset_name} added successfully!")
             st.rerun()
     else:
