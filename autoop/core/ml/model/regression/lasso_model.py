@@ -51,9 +51,7 @@ class Lasso(Model):
         :raises ValueError: If the model has not been initialized.
         """
         if self._model is None:
-            raise ValueError(
-                """Model has not been initialized.
-                  Call `initialize_model()` first.""")
+            self.intialize_model()
 
         self._model.fit(observations, ground_truth)
         self.parameters = {
