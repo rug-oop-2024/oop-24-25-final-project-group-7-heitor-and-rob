@@ -58,8 +58,6 @@ if datasets:
             st.write("### Data Preview")
             st.dataframe(data.head())
 
-            st.write("Debug: Type of data:", type(data))
-
             features = detect_feature_types(selected_dataset)
             feature_names = [feature.name for feature in features]
 
