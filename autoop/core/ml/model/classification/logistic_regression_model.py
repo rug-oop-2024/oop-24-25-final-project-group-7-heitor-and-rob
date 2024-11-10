@@ -5,7 +5,7 @@ from autoop.core.ml.model.model import Model
 class LogisticRegression(Model):
     """Simple Logistic Regression classifier."""
 
-    def __init__(self, learning_rate: float = 0.01, num_iterations: int = 1000):
+    def __init__(self, name: str = "Logistic Regression", type: str = "classification", learning_rate: float = 0.01, num_iterations: int = 1000):
         """
         Initialize the Logistic Regression model with given hyperparameters.
 
@@ -16,7 +16,7 @@ class LogisticRegression(Model):
         num_iterations : int, optional
             The number of iterations for gradient descent. Defaults to 1000.
         """
-        super().__init__(name="Logistic Regression", type="classification")
+        super().__init__(name=name, type=type)
         self.learning_rate = learning_rate
         self.num_iterations = num_iterations
         self.weights = None
