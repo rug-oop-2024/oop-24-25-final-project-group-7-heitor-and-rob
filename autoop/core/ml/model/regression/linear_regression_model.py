@@ -1,87 +1,66 @@
 import numpy as np
 from autoop.core.ml.model.model import Model
+from copy import deepcopy
 
 
 class LinearRegression(Model):
     """
-    Custom implementation of Linear Regression.
-
-    Attributes:
-        type (str): The type of the model, which is 'regression'.
-        parameters (dict): The parameters of the model
-          including weights and bias.
+    A simple linear regression model using basic matrix operations.
     """
 
-    def __init__(
-        self,
-        name: str = "Linear Regression",
-        type: str = "regression",
-        learning_rate: float = 0.01,
-        num_iterations: int = 1000,
-        use_gradient_descent: bool = True,
-        **hyperparameters
-    ) -> None:
+    def __init__(self, name="Simple Linear Regression", type="regression"):
         """
-        Initialize the LinearRegressionModel with given hyperparameters.
-
-        Args:
-            learning_rate (float): The learning rate for gradient descent.
-            num_iterations (int): The number of iterations for gradient
-              descent.
-            use_gradient_descent (bool):
-              Whether to use gradient descent or the
-                                         closed-form solution.
-            **hyperparameters: Arbitrary keyword arguments for model
-                               hyperparameters.
+        Initialize the Simple Linear Regression model.
         """
         super().__init__(name=name, type=type)
-        self.learning_rate = learning_rate
-        self.num_iterations = num_iterations
-        self.use_gradient_descent = use_gradient_descent
-        self.parameters = {}
         self.weights = None
         self.bias = None
 
-    def initialize_model(self) -> None:
-        """Initialize the weights and bias."""
-        self.weights = None
-        self.bias = 0
-
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
-        Train the linear regression model using gradient descent or the normal
-        equation.
+        Train the linear regression model using the normal equation.
 
         Args:
-            X (np.ndarray): Input features of shape (n_samples, n_features).
+            X (np.ndarray): Training data of shape (n_samples, n_features).
             y (np.ndarray): Target values of shape (n_samples,).
         """
-        X = np.c_[np.ones(X.shape[0]), X]
-        num_samples, num_features = X.shape
+        if X.ndim == 1:
+            X = X.reshape(-1, 1)
 
-        if self.use_gradient_descent:
-            self.weights = np.zeros(num_features)
+        X_b = np.hstack([np.ones((X.shape[0], 1)), X])
 
-            for i in range(self.num_iterations):
-                predictions = np.dot(X, self.weights)
-                error = predictions - y
-                gradient = (1 / num_samples) * np.dot(X.T, error)
-                self.weights -= self.learning_rate * gradient
-        else:
-            self.weights = np.linalg.inv(X.T.dot(X)).dot(X.T).dot(y)
+        theta = np.linalg.pinv(X_b.T @ X_b) @ X_b.T @ y
 
-        self.bias = self.weights[0]  # First element is the bias term
-        self.weights = self.weights[1:]
-        self.parameters = {"weights": self.weights, "bias": self.bias}
+        self.bias = theta[0]
+        self.weights = theta[1:]
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
-        Predict continuous values using the trained linear regression model.
+        Make predictions using the trained model.
 
         Args:
-            X (np.ndarray): Input features of shape (n_samples, n_features).
+            X (np.ndarray): Data of shape (n_samples, n_features).
 
         Returns:
             np.ndarray: Predicted values of shape (n_samples,).
         """
-        return np.dot(X, self.weights) + self.bias
+        if self.weights is None or self.bias is None:
+            raise ValueError("Model has not been fitted yet.")
+
+        if X.ndim == 1:
+            X = X.reshape(-1, 1)
+
+        return X @ self.weights + self.bias
+
+    @property
+    def parameters(self) -> dict:
+        """
+        Get the model parameters.
+
+        Returns:
+            dict: A dictionary containing the weights and bias.
+        """
+        return {
+            "weights": deepcopy(self.weights),
+            "bias": deepcopy(self.bias)
+        }

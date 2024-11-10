@@ -67,22 +67,25 @@ if datasets:
     updated_dataset_type = st.text_input("Updated Dataset Type")
     if st.button("Update Dataset"):
         if updated_dataset_name and updated_dataset_type:
-            dataset = next((d for d in datasets if d.name == dataset_to_update), None)
+            dataset = next(
+                (d for d in datasets if d.name == dataset_to_update), None)
             if dataset:
                 dataset.name = updated_dataset_name
                 dataset.type = updated_dataset_type
                 automl.registry.update(dataset)
-                st.success(f"Dataset {dataset_to_update} updated successfully!")
+                st.success(
+                    f"Dataset {dataset_to_update} updated successfully!")
                 st.rerun()
         else:
-            st.warning("Please enter both an updated dataset name and type for the dataset.")
+            st.warning(
+                "Please enter both an updated dataset name and type for the dataset.")
 else:
     st.write("No datasets available to update.")
 
 st.subheader("Upload new Dataset")
 uploaded_file = st.file_uploader("Choose a CSV file to upload", type=["csv"])
 if uploaded_file:
-    data = pd.read_csv(uploaded_file)
+    data = pd.read_csv(uploaded_file).dropna()
     st.write("### Preview of the uploaded dataset:")
     st.write(data.head())
 

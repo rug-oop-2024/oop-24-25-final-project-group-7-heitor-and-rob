@@ -25,12 +25,6 @@ class Lasso(Model):
         self._parameters = {
             "alpha": alpha
         }
-        self._model = None
-
-    def initialize_model(self) -> None:
-        """
-        Initialize the Lasso model with the specified hyperparameters.
-        """
         self._model = SklearnLasso(**self._parameters)
 
     @property
@@ -40,7 +34,21 @@ class Lasso(Model):
 
         :return: A dictionary of hyperparameters.
         """
-        return deepcopy(self._parameters)
+        parameters = {
+            **self._model.get_params(),
+            "fitted_parameters": getattr(self._model, "coef_", None),
+            "intercept": getattr(self._model, "intercept_", None),
+        }
+        return parameters
+
+    @parameters.setter
+    def parameters(self, value: dict) -> None:
+        """
+        Set the hyperparameters of the model.
+
+        :param value: A dictionary of hyperparameters.
+        """
+        self._parameters = value
 
     def fit(self, observations: np.ndarray, ground_truth: np.ndarray) -> None:
         """
@@ -50,8 +58,6 @@ class Lasso(Model):
         :param ground_truth: Target values.
         :raises ValueError: If the model has not been initialized.
         """
-        if self._model is None:
-            self.intialize_model()
 
         self._model.fit(observations, ground_truth)
         self.parameters = {
