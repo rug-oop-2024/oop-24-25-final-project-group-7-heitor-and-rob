@@ -2,7 +2,7 @@ import numpy as np
 from autoop.core.ml.model.model import Model
 
 
-class LogisticRegressionModel(Model):
+class LogisticRegression(Model):
     def __init__(self, learning_rate=0.01, num_iterations=1000, **hyperparameters):
         super().__init__(**hyperparameters)
         self.type = "classification"

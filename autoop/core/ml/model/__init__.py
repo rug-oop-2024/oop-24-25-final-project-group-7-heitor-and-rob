@@ -37,16 +37,12 @@ def get_model(name: str) -> Type[Model]:
     ValueError: If the task type or model name is not supported.
     """
     model_map = {
-        "classification": {
-            "logistic_regression": LogisticRegression,
-            "random_forest": RandomForest,
-            "KNN": KNearestNeighbors
-        },
-        "regression": {
-            "multiple_linear_regression": MultipleLinearRegression,
-            "linear_regression": LinearRegression,
-            "lasso": Lasso
-        },
+        "logistic_regression": LogisticRegression,
+        "random_forest": RandomForest,
+        "KNN": KNearestNeighbors,
+        "multiple_linear_regression": MultipleLinearRegression,
+        "linear_regression": LinearRegression,
+        "lasso": Lasso
     }
 
     if name not in model_map:
