@@ -1,8 +1,10 @@
 import streamlit as st
 
+
 def main() -> None:
     """
-    Main function to set up the Streamlit page configuration and display content.
+    Main function to set up the Streamlit page 
+    configuration and display content.
     """
     st.set_page_config(
         page_title="Hello",
@@ -11,6 +13,7 @@ def main() -> None:
     st.sidebar.success("Select a page above.")
     with open("../README.md") as readme_file:
         st.markdown(readme_file.read())
+
 
 if __name__ == "__main__":
     main()

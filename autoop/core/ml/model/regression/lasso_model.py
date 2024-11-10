@@ -10,7 +10,9 @@ class Lasso(Model):
     This model is used for linear regression with L1 regularization.
     """
 
-    def __init__(self, alpha: float = 1.0, name: str = "Lasso", type: str = "regression") -> None:
+    def __init__(
+            self, alpha: float = 1.0,
+              name: str = "Lasso", type: str = "regression") -> None:
         """
         Initialize the Lasso model with given hyperparameters.
 

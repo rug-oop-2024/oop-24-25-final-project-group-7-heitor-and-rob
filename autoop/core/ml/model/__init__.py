@@ -65,5 +65,6 @@ def get_model(name: str) -> Type[Model]:
         )
 
     model = model_map[name]
-    task_type = "classification" if name in CLASSIFICATION_MODELS else "regression"
+    task_type = "classification" if (
+        name in CLASSIFICATION_MODELS) else "regression"
     return model(name=name, type=task_type)

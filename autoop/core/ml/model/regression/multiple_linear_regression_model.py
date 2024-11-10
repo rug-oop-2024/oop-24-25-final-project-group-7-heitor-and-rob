@@ -14,7 +14,7 @@ class MultipleLinearRegression(Model):
         A dictionary to store the model parameters.
     """
 
-    def __init__(self, name: str = "Multiple Linear Regression", 
+    def __init__(self, name: str = "Multiple Linear Regression",
                  type: str = "regression") -> None:
         """
         Initialize the MultipleLinearRegression

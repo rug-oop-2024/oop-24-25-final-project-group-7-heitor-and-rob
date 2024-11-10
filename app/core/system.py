@@ -24,7 +24,8 @@ class ArtifactRegistry:
 
     def register(self, artifact: Artifact) -> None:
         """
-        Register an artifact by saving its data in storage and its metadata in the db.
+        Register an artifact by saving its data in
+          storage and its metadata in the db.
 
         :param artifact: The artifact to register.
         """
@@ -94,7 +95,8 @@ class ArtifactRegistry:
 
 class AutoMLSystem:
     """
-    Singleton class for managing the AutoML system, including storage and database.
+    Singleton class for managing the AutoML system,
+      including storage and database.
     """
     _instance = None
 

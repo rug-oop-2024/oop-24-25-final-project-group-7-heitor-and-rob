@@ -1,7 +1,6 @@
 from autoop.core.ml.model.model import Model
 import numpy as np
 import pandas as pd
-from typing import Any
 from copy import deepcopy
 
 
@@ -18,7 +17,7 @@ class KNearestNeighbors(Model):
         _parameters (dict): Model parameters.
     """
 
-    def __init__(self, k: int = 3, name: str = "K-Nearest Neighbors", 
+    def __init__(self, k: int = 3, name: str = "K-Nearest Neighbors",
                  type: str = "classification") -> None:
         """
         Initialize the KNearestNeighbors model.

@@ -1,4 +1,4 @@
-from abc import abstractmethod, ABC
+from abc import ABC
 import numpy as np
 from copy import deepcopy
 
@@ -14,7 +14,7 @@ class Model(ABC):
         parameters: The parameters of the model after fitting.
     """
 
-    def __init__(self, name: str, type: str):
+    def __init__(self, name: str, type: str) -> None:
         """
         Initialize the model with given hyperparameters.
 

@@ -1,5 +1,6 @@
 from typing import Literal
 
+
 class Feature:
     """
     A class used to represent a Feature in a dataset.
@@ -12,7 +13,8 @@ class Feature:
         The type of the feature, either 'numerical' or 'categorical'.
     """
 
-    def __init__(self, name: str, type: Literal["numerical", "categorical"]) -> None:
+    def __init__(self, name: str,
+                  type: Literal["numerical", "categorical"]) -> None:
         """
         Parameters
         ----------

@@ -6,9 +6,9 @@ class LogisticRegression(Model):
     """Logistic Regression classifier."""
 
     def __init__(self, name: str = "Logistic Regression",
-                  type: str = "classification", 
+                 type: str = "classification",
                  learning_rate: float = 0.01,
-                   num_iterations: int = 1000) -> None:
+                 num_iterations: int = 1000) -> None:
         """
         Initialize the Logistic Regression model.
 

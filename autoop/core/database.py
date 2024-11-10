@@ -4,6 +4,7 @@ import os
 
 from autoop.core.storage import Storage
 
+
 class Database():
     """
     A simple database class that uses a storage backend to persist data.
@@ -56,7 +57,7 @@ class Database():
         if not self._data.get(collection, None):
             return None
         return self._data[collection].get(id, None)
-    
+
     def delete(self, collection: str, id: str) -> None:
         """
         Delete a key from the database.
@@ -110,7 +111,7 @@ class Database():
             collection, id = key.split(os.sep)[-2:]
             if not self._data.get(collection, id):
                 self._storage.delete(f"{collection}{os.sep}{id}")
-    
+
     def _load(self) -> None:
         """
         Load the data from storage.

@@ -17,7 +17,8 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
         List[Feature]: List of features with their types.
 
     Raises:
-        ValueError: If dataset is not an instance of Dataset or if dataset has no data to read.
+        ValueError: If dataset is not an instance
+          of Dataset or if dataset has no data to read.
     """
     if not isinstance(dataset, Dataset):
         raise ValueError("dataset must be an instance of Dataset")
@@ -33,7 +34,9 @@ def detect_feature_types(dataset: Dataset) -> List[Feature]:
     for column in df.columns:
         col_data = df[column]
 
-        if pd.api.types.is_numeric_dtype(col_data) or pd.api.types.is_float_dtype(col_data) and (col_data.max() - col_data.min() > 1):
+        if pd.api.types.is_numeric_dtype(
+            col_data) or pd.api.types.is_float_dtype(
+            col_data) and (col_data.max() - col_data.min() > 1):
             feature_type = "numerical"
         else:
             feature_type = "categorical"

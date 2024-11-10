@@ -1,9 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING
 import numpy as np
 
-if TYPE_CHECKING:
-    from .metric import Metric
 
 METRICS = [
     "mean_squared_error",

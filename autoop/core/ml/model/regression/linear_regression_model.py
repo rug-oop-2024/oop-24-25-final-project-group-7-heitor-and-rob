@@ -8,7 +8,8 @@ class LinearRegression(Model):
 
     Attributes:
         type (str): The type of the model, which is 'regression'.
-        parameters (dict): The parameters of the model including weights and bias.
+        parameters (dict): The parameters of the model
+          including weights and bias.
     """
 
     def __init__(
@@ -25,8 +26,10 @@ class LinearRegression(Model):
 
         Args:
             learning_rate (float): The learning rate for gradient descent.
-            num_iterations (int): The number of iterations for gradient descent.
-            use_gradient_descent (bool): Whether to use gradient descent or the
+            num_iterations (int): The number of iterations for gradient
+              descent.
+            use_gradient_descent (bool):
+              Whether to use gradient descent or the
                                          closed-form solution.
             **hyperparameters: Arbitrary keyword arguments for model
                                hyperparameters.
