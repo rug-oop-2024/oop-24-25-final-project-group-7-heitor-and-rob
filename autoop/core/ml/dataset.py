@@ -19,7 +19,7 @@ class Dataset(Artifact):
         super().__init__(type="dataset", *args, **kwargs)
 
     @staticmethod
-    def from_dataframe(data: pd.DataFrame, name: str, asset_path: str, 
+    def from_dataframe(data: pd.DataFrame, name: str, asset_path: str,
                        version: str = "1.0.0") -> 'Dataset':
         """
         Create a Dataset object from a pandas DataFrame.

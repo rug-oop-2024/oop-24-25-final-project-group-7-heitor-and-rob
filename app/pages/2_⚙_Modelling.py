@@ -3,10 +3,8 @@ import pandas as pd
 import os
 from app.core.system import AutoMLSystem
 from autoop.core.ml.pipeline import Pipeline
-from autoop.core.ml.dataset import Dataset
 from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS, get_model
 from autoop.core.ml.metric import METRICS, get_metric
-from autoop.core.ml.pipeline import Pipeline
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
 
@@ -84,7 +82,8 @@ if datasets:
                         available_metrics = METRICS[3:]
                     st.write(f"### Detected task type: {type}")
                     st.info(
-                        f"Task type based on the target feature '{target_feature}': {type}"
+                        f"Task type based on the target feature '{target_feature}': "
+                        f"{type}"
                     )
 
                     st.subheader("Model Selection")
@@ -153,7 +152,8 @@ if datasets:
                             st.success("Model trained successfully!")
 
                             write_helper_text(
-                                "Press the view results button below to see more details.")
+                                "Press the view results button below to see more details."
+                            )
 
                             with st.expander("View Results"):
                                 st.json(pipeline._evaluate())
@@ -163,10 +163,12 @@ if datasets:
 
                     st.subheader("Save Pipeline")
                     write_helper_text(
-                        "Save the pipeline to the registry for future use.")
+                        "Save the pipeline to the registry for future use."
+                    )
                     st.write(
                         "The saved pipeline will be trained regardless of whether you "
-                        "pressed the train model button above.")
+                        "pressed the train model button above."
+                    )
 
                     pipeline_name = st.text_input("Pipeline Name")
                     if st.button("Save Pipeline"):
@@ -177,7 +179,8 @@ if datasets:
                             os.makedirs(pipeline_dir)
 
                         pipeline_path = os.path.join(
-                            pipeline_dir, f"{pipeline_name}.pkl")
+                            pipeline_dir, f"{pipeline_name}.pkl"
+                        )
                         with open(pipeline_path, 'wb') as f:
                             try:
                                 automl.registry.save(pipeline)
@@ -189,6 +192,7 @@ if datasets:
             st.error("Dataset file not found.")
         except Exception as e:
             st.error(
-                f"Error reading dataset: {str(e)}, the problem is with {e}")
+                f"Error reading dataset: {str(e)}, the problem is with {e}"
+            )
     else:
         st.write("No datasets available.")

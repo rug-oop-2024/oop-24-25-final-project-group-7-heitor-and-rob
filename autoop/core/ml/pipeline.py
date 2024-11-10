@@ -51,7 +51,7 @@ class Pipeline:
         target_feature : Feature
             The target feature.
         split : float, optional
-            The ratio to split the dataset into training and testing sets 
+            The ratio to split the dataset into training and testing sets
             (default is 0.8).
         """
         self._dataset = dataset
@@ -61,11 +61,13 @@ class Pipeline:
         self._metrics = metrics
         self._artifacts = {}
         self._split = split
-        if target_feature.type == "categorical" and model.type != "classification":
+        if (target_feature.type == "categorical" and 
+                model.type != "classification"):
             raise ValueError(
                 "Model type must be classification for categorical target feature"
             )
-        if target_feature.type == "continuous" and model.type != "regression":
+        if (target_feature.type == "continuous" and 
+                model.type != "regression"):
             raise ValueError(
                 "Model type must be regression for continuous target feature"
             )
@@ -112,7 +114,8 @@ Pipeline(
             "target_feature": self._target_feature,
             "split": self._split,
         }
-        artifacts.append(Artifact(name="pipeline_config", data=pickle.dumps(pipeline_data)))
+        artifacts.append(Artifact(name="pipeline_config", 
+                                  data=pickle.dumps(pipeline_data)))
         artifacts.append(
             self._model.to_artifact(name=f"pipeline_model_{self._model.type}")
         )
@@ -152,8 +155,10 @@ Pipeline(
         Splits the data into training and testing sets.
         """
         split = self._split
-        self._train_X = [vector[:int(split * len(vector))] for vector in self._input_vectors]
-        self._test_X = [vector[int(split * len(vector)):] for vector in self._input_vectors]
+        self._train_X = [vector[:int(split * len(vector))] 
+                         for vector in self._input_vectors]
+        self._test_X = [vector[int(split * len(vector)):] 
+                        for vector in self._input_vectors]
         self._train_y = self._output_vector[:int(split * len(self._output_vector))]
         self._test_y = self._output_vector[int(split * len(self._output_vector)):]
 
@@ -211,5 +216,3 @@ Pipeline(
             "metrics": self._metrics_results,
             "predictions": self._predictions,
         }
-
-
