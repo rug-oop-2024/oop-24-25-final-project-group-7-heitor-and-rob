@@ -12,8 +12,8 @@ from autoop.core.ml.model.regression.multiple_linear_regression_model import (
 )
 from autoop.core.ml.model.regression.lasso_model import Lasso
 from autoop.core.ml.model.classification.KNN_model import KNearestNeighbors
-from autoop.core.ml.model.classification.logistic_regression_model import (
-    LogisticRegression,
+from autoop.core.ml.model.classification.decision_tree_model import (
+    DecisionTree,
 )
 from autoop.core.ml.model.classification.random_forest_model import (
     RandomForest,
@@ -28,7 +28,7 @@ REGRESSION_MODELS = [
 ]
 
 CLASSIFICATION_MODELS = [
-    "logistic_regression",
+    "DecisionTree",
     "random_forest",
     "KNN"
 ]
@@ -50,7 +50,7 @@ def get_model(name: str) -> Type[Model]:
     ValueError: If the task type or model name is not supported.
     """
     model_map = {
-        "logistic_regression": LogisticRegression,
+        "DecisionTree": DecisionTree,
         "random_forest": RandomForest,
         "KNN": KNearestNeighbors,
         "multiple_linear_regression": MultipleLinearRegression,
