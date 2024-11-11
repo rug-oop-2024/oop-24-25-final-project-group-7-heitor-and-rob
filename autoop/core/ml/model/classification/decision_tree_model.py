@@ -10,20 +10,23 @@ class DecisionTree(Model):
 
     Attributes:
         max_depth (int): Maximum depth of the tree.
-        min_samples_split (int): Minimum number of samples required to split an internal node.
+        min_samples_split (int): Minimum samples to split node.
         name (str): Name of the model.
         type (str): Type of the model.
         _model (DecisionTreeClassifier): The DecisionTreeClassifier instance.
     """
 
-    def __init__(self, max_depth: int = None, min_samples_split: int = 2,
-                 name: str = "Decision Tree", type: str = "classification") -> None:
+    def __init__(self,
+                 max_depth: int = None,
+                 min_samples_split: int = 2,
+                 name: str = "Decision Tree",
+                 type: str = "classification") -> None:
         """
         Initializes the DecisionTree model with given hyperparameters.
 
         Args:
             max_depth (int): Maximum depth of the tree.
-            min_samples_split (int): Minimum number of samples required to split an internal node.
+            min_samples_split (int): Minimum samples to split node.
             name (str): Name of the model.
             type (str): Type of the model.
         """
@@ -36,7 +39,7 @@ class DecisionTree(Model):
         }
         self._model = DecisionTreeClassifier(**self._parameters)
 
-    def fit(self, X, y) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
         Fits the DecisionTree model to the provided data.
 
@@ -58,7 +61,7 @@ class DecisionTree(Model):
         self.parameters = {"strict_parameters": deepcopy(
             self._model.get_params())}
 
-    def predict(self, X) -> np.ndarray:
+    def predict(self, X: np.ndarray) -> np.ndarray:
         """
         Predicts the target values for the provided data.
 
