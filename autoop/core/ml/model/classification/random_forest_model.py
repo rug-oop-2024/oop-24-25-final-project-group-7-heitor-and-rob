@@ -58,6 +58,8 @@ class RandomForest(Model):
         Raises:
             ValueError: If the model has not been initialized.
         """
+        X = np.asarray(X)
+        y = np.asarray(y)
         if self._model is None:
             raise ValueError(
                 "Model has not been initialized. Call `initialize_model()` "
@@ -81,6 +83,7 @@ class RandomForest(Model):
         Raises:
             ValueError: If the model has not been initialized.
         """
+        X = np.asarray(X)
         if self._model is None:
             raise ValueError(
                 "Model has not been initialized. Call `initialize_model()` "
