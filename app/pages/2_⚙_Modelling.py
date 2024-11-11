@@ -196,8 +196,8 @@ if datasets:
                 "Enter Pipeline Version", "1.0.0")
 
             if pipeline_name and pipeline_version:
-                asset_path = f"pipelines/{pipeline_name}_{
-                    pipeline_version}.pkl"
+                asset_path = f"pipelines/{pipeline_name}_
+                {pipeline_version}.pkl"
 
                 if st.button("Save Pipeline as Artifact"):
                     st.write("Saving pipeline as artifact...")
