@@ -74,23 +74,37 @@ if pipeline_names:
 
         st.subheader("Upload CSV for Predictions")
         write_helper_text(
-            "Upload a CSV file to perform predictions on the selected pipeline.")
+            """Please upload a CSV file that matches the input feature structure expected by the selected pipeline.
+            Ensure that the CSV includes all required input feature columns but **does not** include the target column 
+            (the value you want to predict). The file should be in CSV format with appropriate column headers.
+            """
+        )
         uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
-        if uploaded_file is not None:
+        if uploaded_file:
             data = pd.read_csv(uploaded_file)
             st.write("Uploaded Data Preview:")
             st.dataframe(data.head())
 
-            if st.button("Perform Prediction"):
-                # Replace this with actual model prediction logic
-                st.write("Performing prediction on uploaded data...")
-                st.success("Predictions completed successfully!")
-                # Dummy prediction logic
-                predictions = data[[feature.name for feature in pipeline_data['input_features']]].apply(
-                    lambda x: 'Prediction', axis=1
-                )
-                st.write("Predicted Results:")
-                st.dataframe(predictions)
+            required_columns = [
+                feature.name for feature in pipeline_data['input_features']]
+            if all(col in data.columns for col in required_columns):
+                st.write("CSV file has the required columns for predictions.")
+
+                if st.button("Perform Prediction"):
+                    # Replace this with actual prediction logic using your model
+                    # For example, assuming `pipeline_data['model']` has a `predict` method:
+                    predictions = pipeline_data['model'].predict(
+                        data[required_columns])
+
+                    st.success("Predictions completed successfully!")
+                    st.write("Predicted Results:")
+                    data['Predictions'] = predictions
+                    st.dataframe(data[['Predictions']])
+            else:
+                st.error(
+                    "The uploaded CSV does not contain the required columns for the model.")
+        else:
+            st.info("Please upload a CSV file to proceed with predictions.")
 else:
     st.write("No saved pipelines found.")
