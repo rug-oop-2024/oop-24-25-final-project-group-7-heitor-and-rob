@@ -74,8 +74,9 @@ if pipeline_names:
         st.write(f"**Target Feature**:{pipeline_data['target_feature'].name}")
         st.write(f"**Split Ratio**: {pipeline_data['split']}")
         st.write(
-            f"**Metrics**: {[metric.__class__.__name__ for
-                              metric in pipeline_data['metrics']]}")
+            f"** Metrics**: {[metric.__class__.__name__ for
+                             metric in pipeline_data['metrics']]}"
+        )
 
         st.subheader("Upload CSV for Predictions")
         write_helper_text(

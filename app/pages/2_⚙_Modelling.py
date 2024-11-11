@@ -18,8 +18,10 @@ def write_helper_text(text: str) -> None:
     :param text: The text to display as helper text.
     :type text: str
     """
-    st.write(f"<p style=\"color: #888;\">{text}</p>",
-              unsafe_allow_html=True)
+    st.write(
+        f"<p style=\"color: #888;\">{text}</p>",
+        unsafe_allow_html=True
+    )
 
 
 st.write("# ⚙ Modelling")
@@ -237,7 +239,7 @@ if datasets:
                                     pipeline._target_feature.name,
                                 "model": pipeline._model.type,
                                 "task_type": "regression" if
-                                    pipeline._target_feature.type == "numerical"
+                                pipeline._target_feature.type == "numerical"
                                     else "classification",
                                 "split_ratio": pipeline._split,
                                 "metrics": [
