@@ -70,7 +70,8 @@ class Pipeline:
         if target_feature.type == "categorical":
             if model.type != "regression":
                 raise ValueError(
-                    "Model type must be regression for numerical target feature"
+                    """Model type must be regression 
+                    for numerical target feature"""
                 )
 
     def __str__(self) -> str:
