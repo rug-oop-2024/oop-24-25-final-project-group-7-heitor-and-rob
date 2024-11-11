@@ -40,6 +40,7 @@ class LogisticRegression(Model):
         np.ndarray
             The output array with the sigmoid function applied.
         """
+        z = np.clip(z, -500, 500)
         return 1 / (1 + np.exp(-z))
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
@@ -53,6 +54,8 @@ class LogisticRegression(Model):
         y : np.ndarray
             A 1D array of target values.
         """
+        X = np.asarray(X)
+        y = np.asarray(y).ravel()
         num_samples, num_features = X.shape
         self.weights = np.zeros(num_features)
         self.bias = 0
