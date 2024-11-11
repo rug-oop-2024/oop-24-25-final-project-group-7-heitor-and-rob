@@ -68,9 +68,9 @@ if pipeline_names:
         st.write(f"**Name**: {selected_pipeline['name']}")
         st.write(f"**Model Type**: {pipeline_data['model'].type}")
         st.write(
-            f"**Input Features**: {[
-                feature.name for feature in pipeline_data[
-                    'input_features']]}")
+            f"**Input Features**: "
+            f"{[feature.name for feature in pipeline_data['input_features']]}"
+        )
         st.write(f"**Target Feature**: {pipeline_data[
             'target_feature'].name}")
         st.write(f"**Split Ratio**: {pipeline_data['split']}")

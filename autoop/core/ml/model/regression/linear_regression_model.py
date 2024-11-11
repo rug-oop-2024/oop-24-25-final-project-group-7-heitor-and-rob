@@ -9,8 +9,8 @@ class LinearRegression(Model):
     """
 
     def __init__(self,
-                  name: str = "Simple Linear Regression",
-                    type: str = "regression") -> None:
+                 name: str = "Simple Linear Regression",
+                 type: str = "regression") -> None:
         """
         Initialize the Simple Linear Regression model.
         """
