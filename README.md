@@ -152,31 +152,31 @@ If the feature has been implemented by both students, write `both`.
 If you did not implement the feature
 
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
-|-------------------------------------- |--------------|----------------------|--------------------------|---------|         
-| Up-to-date requirements.txt           | NF           | Rob                  |         |x|
-| `ML/detect-features`                  | FN           | Heitor               |         |x|
-| `ML/artifact`                         | NF           | Heitor               |         |x|
-| `ML/feature`                          | NF           | Rob                  |         |x|
-| `ML/metric`                           | NF           | Rob                  |         |x|
-| `ML/metric/extensions`                | FN           | Rob                  |         |x|
-| `ML/model`                            | NF           | Heitor               |         |x|
-| `ML/model/extensions`                 | FN           | Heitor               |         |x|
-| `ML/pipeline/evaluation`              | FN           | Rob                  |         |x| 
-| `ST/page/datasets`                    | NF           | Heitor               |         |x|
-| `ST/datasets/management/create`       | FN           | Heitor               |         |x|
-| `ST/datasets/management/save`         | FN           | Heitor               |         |x|
-| `ST/page/modelling`                   | NF           | Rob                  |         |x|
-| `ST/modelling/datasets/list`          | FN           | Rob                  |         |x|
-| `ST/modelling/datasets/features`      | FN           | Rob                  |         |x|
-| `ST/modelling/models`                 | FN           | Heitor               |         |x|
-| `ST/modelling/pipeline/split`         | FN           | Heitor               |         |x|
-| `ST/modelling/pipeline/metrics`       | FN           | Heitor               |         |x|
-| `ST/modelling/pipeline/summary`       | FN           | Rob                  |         |x|
-| `ST/modelling/pipeline/train`         | FN           | Rob                  |         |x|
-| `ST/modelling/pipeline/save`          | FN           | Heitor               |         |x|
-| `ST/page/deployment`                  | FN           | Heitor               |         |x|
-| `ST/deployment/load`                  | FN           | Heitor               |         |x|
-| `ST/deployment/predict`               | FN           | Rob                  |         |x|
+|---------------------------------------|--------------|----------------------|------------------------------------------|---------|         
+| Up-to-date requirements.txt           | NF           | Rob                  | X                                        |         |
+| `ML/detect-features`                  | FN           | Heitor               | X                                        |         |
+| `ML/artifact`                         | NF           | Heitor               | X                                        |         |
+| `ML/feature`                          | NF           | Rob                  | X                                        |         |
+| `ML/metric`                           | NF           | Rob                  | X                                        |         |
+| `ML/metric/extensions`                | FN           | Rob                  | X                                        |         |
+| `ML/model`                            | NF           | Heitor               | X                                        |         |
+| `ML/model/extensions`                 | FN           | Heitor               | X                                        |         |
+| `ML/pipeline/evaluation`              | FN           | Rob                  | X                                        |         | 
+| `ST/page/datasets`                    | NF           | Heitor               | X                                        |         |
+| `ST/datasets/management/create`       | FN           | Heitor               | X                                        |         |
+| `ST/datasets/management/save`         | FN           | Heitor               | X                                        |         |
+| `ST/page/modelling`                   | NF           | Rob                  | X                                        |         |
+| `ST/modelling/datasets/list`          | FN           | Rob                  | X                                        |         |
+| `ST/modelling/datasets/features`      | FN           | Rob                  | X                                        |         |
+| `ST/modelling/models`                 | FN           | Heitor               | X                                        |         |
+| `ST/modelling/pipeline/split`         | FN           | Heitor               | X                                        |         |
+| `ST/modelling/pipeline/metrics`       | FN           | Heitor               | X                                        |         |
+| `ST/modelling/pipeline/summary`       | FN           | Rob                  | X                                        |         |
+| `ST/modelling/pipeline/train`         | FN           | Rob                  | X                                        |         |
+| `ST/modelling/pipeline/save`          | FN           | Heitor               | X                                        |         |
+| `ST/page/deployment`                  | FN           | Heitor               | X                                        |         |
+| `ST/deployment/load`                  | FN           | Heitor               | X                                        |         |
+| `ST/deployment/predict`               | FN           | Rob                  | X                                        |         |
 
 If you add extra features, please indicate them below:
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
