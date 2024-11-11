@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+import pickle
 from app.core.system import AutoMLSystem
 from autoop.core.ml.pipeline import Pipeline
 from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS
@@ -8,6 +9,7 @@ from autoop.core.ml.model import get_model
 from autoop.core.ml.metric import METRICS, get_metric
 from autoop.core.ml.feature import Feature
 from autoop.functional.feature import detect_feature_types
+from autoop.core.ml.artifact import Artifact
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
 
@@ -68,7 +70,8 @@ if datasets:
             input_features = st.multiselect(
                 "Select Input Features", feature_names
             )
-            available_target_features = [feature for feature in feature_names if feature not in input_features]
+            available_target_features = [
+                feature for feature in feature_names if feature not in input_features]
             target_feature = st.selectbox(
                 "Select Target Feature", available_target_features
             )
@@ -138,17 +141,17 @@ if datasets:
             # this is where it stops working and i dont know why
             model = get_model(selected_model)
             metrics = [get_metric(metric) for metric in metrics]
-            input_f = [
+            input = [
                 feature for feature in features if feature.name in input_features]
-            target_f = next(
+            target = next(
                 feature for feature in features if feature.name == target_feature)
 
             pipeline = Pipeline(
                 model=model,
                 metrics=metrics,
                 dataset=selected_dataset,
-                input_features=input_f,
-                target_feature=target_f,
+                input_features=input,
+                target_feature=target,
                 split=split_ratio
             )
 
@@ -168,6 +171,53 @@ if datasets:
 
                 except Exception as e:
                     st.error(f"Error training model: {str(e)}")
+
+            st.subheader("Save Pipeline")
+            write_helper_text(
+                "Provide a name and version for your pipeline to save it as an artifact.")
+
+            pipeline_name = st.text_input("Enter Pipeline Name", "my_pipeline")
+            pipeline_version = st.text_input("Enter Pipeline Version", "1.0.0")
+
+            st.write("Debug: Current working directory:", os.getcwd())
+
+            if pipeline_name and pipeline_version:
+                asset_path = f"pipelines/{pipeline_name}_{pipeline_version}.pkl"
+
+                if st.button("Save Pipeline as Artifact"):
+                    st.write("Saving pipeline as artifact...")
+                    try:
+                        pipeline_data = {
+                            "model": pipeline._model,
+                            "input_features": pipeline._input_features,
+                            "target_feature": pipeline._target_feature,
+                            "split": pipeline._split,
+                            "artifacts": pipeline._artifacts,
+                            "metrics": pipeline._metrics,
+                        }
+                        serialized_pipeline = pickle.dumps(pipeline_data)
+
+                        new_pipeline_artifact = Artifact(
+                            name=pipeline_name,
+                            version=pipeline_version,
+                            type="pipeline",
+                            asset_path=asset_path,
+                            data=serialized_pipeline,
+                            tags=["pipeline", "automl"],
+                            metadata={
+                                "input_features": [feature.name for feature in pipeline._input_features],
+                                "target_feature": pipeline._target_feature.name,
+                                "model": pipeline._model.type,
+                                "task_type": "regression" if pipeline._target_feature.type == "continuous" else "classification",
+                                "split_ratio": pipeline._split,
+                                "metrics": [str(metric) for metric in pipeline._metrics]
+                            }
+                        )
+                        automl.registry.register(new_pipeline_artifact)
+                        st.success(
+                            f"Pipeline '{pipeline_name}' version '{pipeline_version}' saved successfully!")
+                    except Exception as e:
+                        st.error(f"Error saving pipeline: {str(e)}")
 
         except FileNotFoundError:
             st.error("Dataset file not found.")
