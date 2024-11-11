@@ -2,9 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 import os
-from typing import List, Dict
 from app.core.system import AutoMLSystem
-from autoop.core.ml.dataset import Dataset
 
 automl = AutoMLSystem.get_instance()
 
@@ -25,6 +23,15 @@ pipeline_dir = "./assets/objects/pipelines"
 
 
 def get_saved_pipelines():
+    """
+    Load all saved pipelines from the pipeline directory.
+
+    :return: A list of dictionaries with "name", "path", and "data" keys.
+        "name" is the filename of the pipeline.
+        "path" is the full path to the pipeline file.
+        "data" is the deserialized pipeline data.
+    """
+
     pipelines = []
     for file_name in os.listdir(pipeline_dir):
         if file_name.endswith('.pkl'):
@@ -74,7 +81,7 @@ if pipeline_names:
         st.write(f"**Target Feature**:{pipeline_data['target_feature'].name}")
         st.write(f"**Split Ratio**: {pipeline_data['split']}")
         st.write(
-            f"** Metrics**: {[metric.__class__.__name__ for metric in pipeline_data['metrics']]}"
+            f"{[metric.__class__.__name__ for metric in pipeline_data['metrics']]}"
         )
 
         st.subheader("Upload CSV for Predictions")
