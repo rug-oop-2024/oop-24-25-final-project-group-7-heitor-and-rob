@@ -22,10 +22,9 @@ def write_helper_text(text: str) -> None:
 
 
 pipeline_dir = "./assets/objects/pipelines"
-saved_pipelines = automl.storage.list(pipeline_dir)
 
 
-def get_saved_pipelines() -> List[Dict[str, ]]:
+def get_saved_pipelines():
     pipelines = []
     for file_name in os.listdir(pipeline_dir):
         if file_name.endswith('.pkl'):
@@ -47,6 +46,7 @@ st.title("Pipeline Management")
 st.write("This page allows you to view, load, and use saved pipelines for predictions.")
 
 st.subheader("Available Pipelines")
+write_helper_text("List of available pipelines.")
 pipelines = get_saved_pipelines()
 pipeline_names = [pipeline['name'] for pipeline in pipelines]
 
@@ -62,6 +62,7 @@ if pipeline_names:
         pipeline_data = selected_pipeline['data']
 
         st.subheader("Pipeline Summary")
+        write_helper_text("Summary of the selected pipeline.")
         st.write(f"**Name**: {selected_pipeline['name']}")
         st.write(f"**Model Type**: {pipeline_data['model'].type}")
         st.write(
@@ -69,9 +70,11 @@ if pipeline_names:
         st.write(f"**Target Feature**: {pipeline_data['target_feature'].name}")
         st.write(f"**Split Ratio**: {pipeline_data['split']}")
         st.write(
-            f"**Metrics**: {[str(metric) for metric in pipeline_data['metrics']]}")
+            f"**Metrics**: {[metric.__class__.__name__ for metric in pipeline_data['metrics']]}")
 
         st.subheader("Upload CSV for Predictions")
+        write_helper_text(
+            "Upload a CSV file to perform predictions on the selected pipeline.")
         uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
         if uploaded_file is not None:

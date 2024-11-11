@@ -208,9 +208,9 @@ if datasets:
                                 "input_features": [feature.name for feature in pipeline._input_features],
                                 "target_feature": pipeline._target_feature.name,
                                 "model": pipeline._model.type,
-                                "task_type": "regression" if pipeline._target_feature.type == "continuous" else "classification",
+                                "task_type": "regression" if pipeline._target_feature.type == "numerical" else "classification",
                                 "split_ratio": pipeline._split,
-                                "metrics": [str(metric) for metric in pipeline._metrics]
+                                "metrics": [metric.__class__.__name__ for metric in pipeline._metrics]
                             }
                         )
                         automl.registry.register(new_pipeline_artifact)
