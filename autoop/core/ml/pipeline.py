@@ -201,7 +201,7 @@ Pipeline(
         predictions = self._model.predict(X)
         for metric in self._metrics:
             result = metric.evaluate(predictions, Y)
-            self._metrics_results.append((metric, result))
+            self._metrics_results.append((f"{metric.__class__.__name__}: {float(result)}"))
         self._predictions = predictions
 
     def execute(self) -> Dict[str, Any]:

@@ -29,7 +29,7 @@ def get_metric(name: str) -> 'Metric':
         raise ValueError("Name of metric must be a non empty string")
     if name.lower() == 'accuracy':
         return Accuracy()
-    if name.lower() == "meansquarederror":
+    if name.lower() == "mean_squared_error":
         return MeanSquaredError()
     if name.lower() == "root_mean_squared_error":
         return RootMeanSquaredError()

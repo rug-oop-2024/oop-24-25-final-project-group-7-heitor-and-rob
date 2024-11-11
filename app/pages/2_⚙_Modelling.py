@@ -167,7 +167,13 @@ if datasets:
                     )
 
                     with st.expander("View Results"):
-                        st.json(pipeline._evaluate())
+                        for key, value in results.items():
+                            st.write(f"**{key}**:")
+                            if isinstance(value, list):
+                                for item in value:
+                                    st.write(f"- {item}")
+                            else:
+                                st.write(value)
 
                 except Exception as e:
                     st.error(f"Error training model: {str(e)}")
@@ -179,14 +185,15 @@ if datasets:
             pipeline_name = st.text_input("Enter Pipeline Name", "my_pipeline")
             pipeline_version = st.text_input("Enter Pipeline Version", "1.0.0")
 
-            st.write("Debug: Current working directory:", os.getcwd())
-
             if pipeline_name and pipeline_version:
                 asset_path = f"pipelines/{pipeline_name}_{pipeline_version}.pkl"
 
                 if st.button("Save Pipeline as Artifact"):
                     st.write("Saving pipeline as artifact...")
                     try:
+                        pipeline._preprocess_features()
+                        pipeline._split_data()
+                        pipeline._train()
                         pipeline_data = {
                             "model": pipeline._model,
                             "input_features": pipeline._input_features,

@@ -43,7 +43,8 @@ def get_saved_pipelines():
 
 
 st.title("Pipeline Management")
-st.write("This page allows you to view, load, and use saved pipelines for predictions.")
+st.write("""This page allows you to view, load,
+          and use saved pipelines for predictions.""")
 
 st.subheader("Available Pipelines")
 write_helper_text("List of available pipelines.")
@@ -56,7 +57,8 @@ if pipeline_names:
 
     if selected_pipeline_name:
         selected_pipeline = next(
-            pipeline for pipeline in pipelines if pipeline['name'] == selected_pipeline_name
+            pipeline for pipeline in pipelines if pipeline[
+                'name'] == selected_pipeline_name
         )
 
         pipeline_data = selected_pipeline['data']
@@ -66,17 +68,25 @@ if pipeline_names:
         st.write(f"**Name**: {selected_pipeline['name']}")
         st.write(f"**Model Type**: {pipeline_data['model'].type}")
         st.write(
-            f"**Input Features**: {[feature.name for feature in pipeline_data['input_features']]}")
-        st.write(f"**Target Feature**: {pipeline_data['target_feature'].name}")
+            f"**Input Features**: {[
+                feature.name for feature in pipeline_data[
+                    'input_features']]}")
+        st.write(f"**Target Feature**: {pipeline_data[
+            'target_feature'].name}")
         st.write(f"**Split Ratio**: {pipeline_data['split']}")
         st.write(
-            f"**Metrics**: {[metric.__class__.__name__ for metric in pipeline_data['metrics']]}")
+            f"**Metrics**: {[metric.__class__.__name__ for
+                              metric in pipeline_data['metrics']]}")
 
         st.subheader("Upload CSV for Predictions")
         write_helper_text(
-            """Please upload a CSV file that matches the input feature structure expected by the selected pipeline.
-            Ensure that the CSV includes all required input feature columns but **does not** include the target column 
-            (the value you want to predict). The file should be in CSV format with appropriate column headers.
+            """Please upload a CSV file that matches the input feature
+              structure expected by the selected pipeline.
+            Ensure that the CSV includes all required
+              input feature columns but
+              **does not** include the target column
+             (the value you want to predict). The file should be in CSV
+              format with appropriate column headers.
             """
         )
         uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
@@ -92,8 +102,6 @@ if pipeline_names:
                 st.write("CSV file has the required columns for predictions.")
 
                 if st.button("Perform Prediction"):
-                    # Replace this with actual prediction logic using your model
-                    # For example, assuming `pipeline_data['model']` has a `predict` method:
                     predictions = pipeline_data['model'].predict(
                         data[required_columns])
 
@@ -103,7 +111,8 @@ if pipeline_names:
                     st.dataframe(data[['Predictions']])
             else:
                 st.error(
-                    "The uploaded CSV does not contain the required columns for the model.")
+                    """The uploaded CSV does not contain
+                      the required columns for the model.""")
         else:
             st.info("Please upload a CSV file to proceed with predictions.")
 else:
