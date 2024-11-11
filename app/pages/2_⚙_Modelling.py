@@ -25,7 +25,7 @@ def write_helper_text(text: str) -> None:
 st.write("# ⚙ Modelling")
 write_helper_text(
     """In this section, you can design a
-      machine learning pipeline to train a model on a dataset."""
+    machine learning pipeline to train a model on a dataset."""
 )
 
 automl = AutoMLSystem.get_instance()
@@ -39,8 +39,9 @@ write_helper_text(
 )
 if datasets:
     dataset_names = [dataset.name for dataset in datasets]
-    selected_dataset_name = st.selectbox("Select a dataset",
-                                          dataset_names)
+    selected_dataset_name = st.selectbox(
+        "Select a dataset", dataset_names
+    )
     selected_dataset = next(
         dataset for dataset in datasets if
         dataset.name == selected_dataset_name
@@ -64,8 +65,8 @@ if datasets:
             st.subheader("Feature Detection")
             write_helper_text(
                 """Select the input features and
-                  the target feature. The target feature """
-                """will be used to detect the task type (
+                the target feature. The target feature
+                will be used to detect the task type (
                 classification or regression)."""
             )
             input_features = st.multiselect(
@@ -73,14 +74,15 @@ if datasets:
             )
             available_target_features = [
                 feature for feature in feature_names if
-                  feature not in input_features]
+                feature not in input_features
+            ]
             target_feature = st.selectbox(
                 "Select Target Feature", available_target_features
             )
 
             target_feature_type = next(
                 feature.type for feature in features if
-                  feature.name == target_feature)
+                feature.name == target_feature)
 
             if target_feature_type == "numerical":
                 task_type = "regression"
@@ -146,10 +148,11 @@ if datasets:
             metrics = [get_metric(metric) for metric in metrics]
             input = [
                 feature for feature in features if
-                  feature.name in input_features]
+                feature.name in input_features
+            ]
             target = next(
                 feature for feature in features if
-                  feature.name == target_feature)
+                feature.name == target_feature)
 
             pipeline = Pipeline(
                 model=model,
@@ -186,8 +189,8 @@ if datasets:
             st.subheader("Save Pipeline")
             write_helper_text(
                 """Provide a name and version for your
-                  pipeline to save it as an
-                 artifact."""
+                pipeline to save it as an
+                artifact."""
             )
 
             pipeline_name = st.text_input(
@@ -208,8 +211,11 @@ if datasets:
                         pipeline._train()
                         pipeline_data = {
                             "model": pipeline._model,
-                            "input_features": pipeline._input_features,
-                            "target_feature": pipeline._target_feature,
+                            "input_features": [feature.name
+                                               for feature in
+                                               pipeline._input_features],
+                            "target_feature":
+                                pipeline._target_feature.name,
                             "split": pipeline._split,
                             "artifacts": pipeline._artifacts,
                             "metrics": pipeline._metrics,
@@ -225,18 +231,19 @@ if datasets:
                             tags=["pipeline", "automl"],
                             metadata={
                                 "input_features": [feature.name
-                                                    for feature in
-                                                    pipeline._input_features],
+                                                   for feature in
+                                                   pipeline._input_features],
                                 "target_feature":
-                                  pipeline._target_feature.name,
+                                    pipeline._target_feature.name,
                                 "model": pipeline._model.type,
-                            "task_type": "regression" if
-                              pipeline._target_feature.type == "numerical"
-                                else "classification",
+                                "task_type": "regression" if
+                                    pipeline._target_feature.type == "numerical"
+                                    else "classification",
                                 "split_ratio": pipeline._split,
                                 "metrics": [
-                                    metric.__class__.__name__ for 
-                                    metric in pipeline._metrics]
+                                    metric.__class__.__name__ for
+                                    metric in pipeline._metrics
+                                ]
                             }
                         )
                         automl.registry.register(new_pipeline_artifact)

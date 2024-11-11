@@ -71,8 +71,7 @@ if pipeline_names:
             f"**Input Features**: "
             f"{[feature.name for feature in pipeline_data['input_features']]}"
         )
-        st.write(f"**Target Feature**: {pipeline_data[
-            'target_feature'].name}")
+        st.write(f"**Target Feature**:{pipeline_data['target_feature'].name}")
         st.write(f"**Split Ratio**: {pipeline_data['split']}")
         st.write(
             f"**Metrics**: {[metric.__class__.__name__ for
