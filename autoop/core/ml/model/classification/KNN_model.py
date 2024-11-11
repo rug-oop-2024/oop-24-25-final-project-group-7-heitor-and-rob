@@ -69,11 +69,13 @@ class KNearestNeighbors(Model):
         Raises
         ------
         ValueError
-            If the number of observations does not match the number of ground truth labels.
+            If the number of observations does not match the
+              number of ground truth labels.
         """
         if observations.shape[0] != ground_truth.shape[0]:
             raise ValueError(
-                "The number of observations must match the number of ground truth labels."
+                """The number of observations must match the
+                  number of ground truth labels."""
             )
 
         if len(ground_truth.shape) > 1:
@@ -88,7 +90,8 @@ class KNearestNeighbors(Model):
 
     def predict(self, observations: np.ndarray) -> np.ndarray:
         """
-        Predicts the labels of the given observations using the K-Nearest Neighbors
+        Predicts the labels of the given observations
+          using the K-Nearest Neighbors
         algorithm.
 
         Parameters
@@ -99,7 +102,8 @@ class KNearestNeighbors(Model):
         Returns
         -------
         np.ndarray
-            A 1D array of the predicted labels. The length of the array is equal to
+            A 1D array of the predicted labels.
+              The length of the array is equal to
             the number of observations.
         """
         if len(observations.shape) == 1:
@@ -110,7 +114,8 @@ class KNearestNeighbors(Model):
 
     def _predict_single(self, observation: np.ndarray) -> np.ndarray:
         """
-        Predicts the label of a single observation using the K-Nearest Neighbors
+        Predicts the label of a single observation using the
+          K-Nearest Neighbors
         algorithm.
 
         Parameters

@@ -1,13 +1,10 @@
 import streamlit as st
-import pandas as pd
-import os
 import pickle
 from app.core.system import AutoMLSystem
 from autoop.core.ml.pipeline import Pipeline
 from autoop.core.ml.model import CLASSIFICATION_MODELS, REGRESSION_MODELS
 from autoop.core.ml.model import get_model
 from autoop.core.ml.metric import METRICS, get_metric
-from autoop.core.ml.feature import Feature
 from autoop.functional.feature import detect_feature_types
 from autoop.core.ml.artifact import Artifact
 
@@ -21,7 +18,8 @@ def write_helper_text(text: str) -> None:
     :param text: The text to display as helper text.
     :type text: str
     """
-    st.write(f"<p style=\"color: #888;\">{text}</p>", unsafe_allow_html=True)
+    st.write(f"<p style=\"color: #888;\">{text}</p>",
+              unsafe_allow_html=True)
 
 
 st.write("# ⚙ Modelling")
@@ -41,13 +39,16 @@ write_helper_text(
 )
 if datasets:
     dataset_names = [dataset.name for dataset in datasets]
-    selected_dataset_name = st.selectbox("Select a dataset", dataset_names)
+    selected_dataset_name = st.selectbox("Select a dataset",
+                                          dataset_names)
     selected_dataset = next(
         dataset for dataset in datasets if
         dataset.name == selected_dataset_name
     )
     st.write(
-        f"Selected Dataset: {selected_dataset.name}, Type: {selected_dataset.type}")
+        f"Selected Dataset: {selected_dataset.name}, Type: "
+        f"{selected_dataset.type}"
+    )
 
     if selected_dataset:
         st.write(f"### Selected Dataset: {selected_dataset.name}")
@@ -71,13 +72,15 @@ if datasets:
                 "Select Input Features", feature_names
             )
             available_target_features = [
-                feature for feature in feature_names if feature not in input_features]
+                feature for feature in feature_names if
+                  feature not in input_features]
             target_feature = st.selectbox(
                 "Select Target Feature", available_target_features
             )
 
             target_feature_type = next(
-                feature.type for feature in features if feature.name == target_feature)
+                feature.type for feature in features if
+                  feature.name == target_feature)
 
             if target_feature_type == "numerical":
                 task_type = "regression"
@@ -142,9 +145,11 @@ if datasets:
             model = get_model(selected_model)
             metrics = [get_metric(metric) for metric in metrics]
             input = [
-                feature for feature in features if feature.name in input_features]
+                feature for feature in features if
+                  feature.name in input_features]
             target = next(
-                feature for feature in features if feature.name == target_feature)
+                feature for feature in features if
+                  feature.name == target_feature)
 
             pipeline = Pipeline(
                 model=model,
@@ -180,13 +185,19 @@ if datasets:
 
             st.subheader("Save Pipeline")
             write_helper_text(
-                "Provide a name and version for your pipeline to save it as an artifact.")
+                """Provide a name and version for your
+                  pipeline to save it as an
+                 artifact."""
+            )
 
-            pipeline_name = st.text_input("Enter Pipeline Name", "my_pipeline")
-            pipeline_version = st.text_input("Enter Pipeline Version", "1.0.0")
+            pipeline_name = st.text_input(
+                "Enter Pipeline Name", "my_pipeline")
+            pipeline_version = st.text_input(
+                "Enter Pipeline Version", "1.0.0")
 
             if pipeline_name and pipeline_version:
-                asset_path = f"pipelines/{pipeline_name}_{pipeline_version}.pkl"
+                asset_path = f"pipelines/{pipeline_name}_{
+                    pipeline_version}.pkl"
 
                 if st.button("Save Pipeline as Artifact"):
                     st.write("Saving pipeline as artifact...")
@@ -212,17 +223,25 @@ if datasets:
                             data=serialized_pipeline,
                             tags=["pipeline", "automl"],
                             metadata={
-                                "input_features": [feature.name for feature in pipeline._input_features],
-                                "target_feature": pipeline._target_feature.name,
+                                "input_features": [feature.name
+                                                    for feature in
+                                                    pipeline._input_features],
+                                "target_feature":
+                                  pipeline._target_feature.name,
                                 "model": pipeline._model.type,
-                                "task_type": "regression" if pipeline._target_feature.type == "numerical" else "classification",
+                            "task_type": "regression" if
+                              pipeline._target_feature.type == "numerical"
+                                else "classification",
                                 "split_ratio": pipeline._split,
-                                "metrics": [metric.__class__.__name__ for metric in pipeline._metrics]
+                                "metrics": [
+                                    metric.__class__.__name__ for 
+                                    metric in pipeline._metrics]
                             }
                         )
                         automl.registry.register(new_pipeline_artifact)
                         st.success(
-                            f"Pipeline '{pipeline_name}' version '{pipeline_version}' saved successfully!")
+                            f"Pipeline '{pipeline_name}' version '{
+                                pipeline_version}' saved successfully!")
                     except Exception as e:
                         st.error(f"Error saving pipeline: {str(e)}")
 

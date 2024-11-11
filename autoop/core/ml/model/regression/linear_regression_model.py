@@ -8,7 +8,7 @@ class LinearRegression(Model):
     A simple linear regression model using basic matrix operations.
     """
 
-    def __init__(self, name="Simple Linear Regression", type="regression"):
+    def __init__(self, name: str = "Simple Linear Regression", type: str = "regression") -> None:
         """
         Initialize the Simple Linear Regression model.
         """

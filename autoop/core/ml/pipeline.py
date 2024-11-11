@@ -61,14 +61,14 @@ class Pipeline:
         self._metrics = metrics
         self._artifacts = {}
         self._split = split
-        if (target_feature.type == "categorical"
-            and model.type != "classification"):
+        if (target_feature.type == "categorical" and
+                model.type != "classification"):
             raise ValueError(
                 """Model type must be classification
                   for categorical target feature"""
             )
-        if (target_feature.type == "continuous"
-            and model.type != "regression"):
+        if (target_feature.type == "continuous" and
+                model.type != "regression"):
             raise ValueError(
                 "Model type must be regression for continuous target feature"
             )
@@ -201,7 +201,8 @@ Pipeline(
         predictions = self._model.predict(X)
         for metric in self._metrics:
             result = metric.evaluate(predictions, Y)
-            self._metrics_results.append((f"{metric.__class__.__name__}: {float(result)}"))
+            self._metrics_results.append(
+                (f"{metric.__class__.__name__}: {float(result)}"))
         self._predictions = predictions
 
     def execute(self) -> Dict[str, Any]:

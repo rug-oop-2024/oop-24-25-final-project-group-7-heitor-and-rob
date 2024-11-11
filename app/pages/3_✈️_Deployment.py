@@ -81,13 +81,12 @@ if pipeline_names:
         st.subheader("Upload CSV for Predictions")
         write_helper_text(
             """Please upload a CSV file that matches the input feature
-              structure expected by the selected pipeline.
+            structure expected by the selected pipeline.
             Ensure that the CSV includes all required
-              input feature columns but
-              **does not** include the target column
-             (the value you want to predict). The file should be in CSV
-              format with appropriate column headers.
-            """
+            input feature columns but
+            **does not** include the target column
+            (the value you want to predict). The file should be in CSV
+            format with appropriate column headers."""
         )
         uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 

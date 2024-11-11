@@ -14,7 +14,7 @@ class Feature:
     """
 
     def __init__(self, name: str,
-                  type: Literal["numerical", "categorical"]) -> None:
+                 type: Literal["numerical", "categorical"]) -> None:
         """
         Parameters
         ----------
